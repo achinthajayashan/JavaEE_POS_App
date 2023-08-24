@@ -97,9 +97,13 @@
                     <input type="tel" class="form-control bg-black border-white text-warning focus-ring-warning focus-ring " id="inputCusContact" name="cusContact">
                 </div>
                 <div class="row m-0 gap-2 mt-5">
-                    <button id="btnSaveCus"type="button" class="btn btn-outline-warning  col">Save</button>
-                    <button id="btnUpdateCus" type="button" class="btn btn-outline-light  col">Update</button>
-                    <button id="btnGetAllCus" type="button" class="btn btn-outline-light col">Get All</button>
+                    <button id="btnGetAllCus" type="button" class="btn btn-light col">Get All</button>
+                    <button id="btnUpdateCus" type="button" class="btn btn-dark  col">Update</button>
+                    <button id="btnDeleteCus" type="button" class="btn btn-danger  col">Delete</button>
+                </div>
+
+                <div class="row m-0 gap-2 mt-2">
+                    <button id="btnSaveCus"type="button" class="btn btn-warning  col">Save</button>
                 </div>
                 <!--                <button type="submit" class="btn btn-outline-warning  container-fluid">Save</button>-->
                 <!--                <button type="submit" class="btn btn-outline-light disabled container-fluid">Update</button>-->
@@ -826,9 +830,33 @@ $("#btnUpdateCus").click(function () {
         data:JSON.stringify(a),
         success: function (resp) {
             getAllCustomers();
+            alert(resp.message);
+        },
+        error: function (error) {
+            alert(error.responseJSON.message);
         }
     });
 });
+
+    $("#btnDeleteCus").click(function () {
+        console.log("clicked");
+        let cusID = $('#InputCID').val();
+
+        $.ajax({
+            url:'http://localhost:8080/JavaEE_Pos/customer?cusID='+cusID,
+            type:"DELETE",
+            dataType:"json",
+            contentType: "application/json",
+            // data:JSON.stringify(cusID),
+            success:function (res) {
+                getAllCustomers()
+                alert(res.message);
+            },
+            error:function (error){
+                alert(error.message)
+            }
+        })
+    });
 
 
 

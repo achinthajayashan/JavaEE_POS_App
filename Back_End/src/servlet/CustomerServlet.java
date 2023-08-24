@@ -119,7 +119,11 @@ public class CustomerServlet extends HttpServlet {
             pstm3.setObject(2, cusAddress);
             pstm3.setObject(3, cusContact);
             if (pstm3.executeUpdate() > 0) {
-                resp.getWriter().println("Customer Updated..!");
+                JsonObjectBuilder response = Json.createObjectBuilder();
+                response.add("state", "Ok");
+                response.add("message", "Successfully Updated.!");
+                response.add("data", "");
+                resp.getWriter().print(response.build());
             }
         } catch (ClassNotFoundException e) {
             JsonObjectBuilder response = Json.createObjectBuilder();
@@ -140,7 +144,39 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doDelete(req, resp);
+        resp.addHeader("Access-Control-Allow-Origin","*");
+        String cusID = req.getParameter("cusID");
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee_pos_app", "root", "12345678");
+
+            PreparedStatement pstm2 = connection.prepareStatement("delete from customer where customer_ID=?");
+            pstm2.setObject(1, cusID);
+            if (pstm2.executeUpdate() > 0) {
+                JsonObjectBuilder response = Json.createObjectBuilder();
+                response.add("state", "Ok");
+                response.add("message", "Successfully Deleted.!");
+                response.add("data", "");
+                resp.getWriter().print(response.build());
+            }
+
+        } catch (ClassNotFoundException e) {
+            JsonObjectBuilder response = Json.createObjectBuilder();
+            response.add("state", "Error");
+            response.add("message", e.getMessage());
+            response.add("data", "");
+            resp.setStatus(400);
+            resp.getWriter().print(response.build());
+        } catch (SQLException e) {
+            JsonObjectBuilder response = Json.createObjectBuilder();
+            response.add("state", "Error");
+            response.add("message", e.getMessage());
+            response.add("data", "");
+            resp.setStatus(400);
+            resp.getWriter().print(response.build());
+        }
     }
 
     @Override
