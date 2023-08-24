@@ -27,16 +27,16 @@
                         <a class="nav-link text-warning" aria-current="page" href="index.html">Home</a>
                     </li>
                     <li id="btnCustomer" class="nav-item">
-                        <a class="nav-link text-white" >Customers</a>
+                        <a class="nav-link text-white">Customers</a>
                     </li>
                     <li id="btnItem" class="nav-item">
-                        <a class="nav-link text-white" >Items</a>
+                        <a class="nav-link text-white">Items</a>
                     </li>
                     <li id="btnOrders" class="nav-item">
-                        <a class="nav-link text-white" >Orders</a>
+                        <a class="nav-link text-white">Orders</a>
                     </li>
                     <li id="btnPlaceOrder" class="nav-item ms-4">
-                        <a class="nav-link border-warning border bg-warning rounded text-black" >Place New
+                        <a class="nav-link border-warning border bg-warning rounded text-black">Place New
                             Order</a>
                     </li>
                 </ul>
@@ -52,7 +52,7 @@
 </header>
 
 <main id="home" class="bg-black container">
-    <section class="container-fluid fl" >
+    <section class="container-fluid fl">
         <div class="col  object-fit-contain">
             <div class="object-fit-contain">
                 <img src="assets/pngwing.com%20(45).png" style="width: 500px"
@@ -78,23 +78,30 @@
 
         <!--        <h5 class="text-warning text-lg-start" >Customer Management</h5>-->
         <div class="col border-warning m-3 border rounded object-fit-contain">
-            <h5 class="text-warning text-center m-lg-3 pt-5" >Add a New Customer</h5>
+            <h5 class="text-warning text-center m-lg-3 pt-5">Add a New Customer</h5>
             <form class="m-5" id="customerForm">
                 <div class="mb-3">
                     <label for="InputCID" class="form-label text-white">Customer ID</label>
-                    <input type="text" class="form-control bg-black border-white text-warning focus-ring-warning" id="InputCID" name="cusID">
+                    <input type="text" class="form-control bg-black border-white text-warning focus-ring-warning"
+                           id="InputCID" name="cusID">
                 </div>
                 <div class="mb-3">
                     <label for="InputCusName" class="form-label text-white">Name</label>
-                    <input type="text" class="form-control bg-black border-white text-warning focus-ring-warning focus-ring" id="InputCusName" name="cusName">
+                    <input type="text"
+                           class="form-control bg-black border-white text-warning focus-ring-warning focus-ring"
+                           id="InputCusName" name="cusName">
                 </div>
                 <div class="mb-3">
                     <label for="inputCusAddress" class="form-label text-white">Address</label>
-                    <input type="text" class="form-control bg-black border-white text-warning focus-ring-warning focus-ring" id="inputCusAddress" name="cusAddress">
+                    <input type="text"
+                           class="form-control bg-black border-white text-warning focus-ring-warning focus-ring"
+                           id="inputCusAddress" name="cusAddress">
                 </div>
                 <div class="mb-3">
                     <label for="inputCusContact" class="form-label text-white">Contact</label>
-                    <input type="tel" class="form-control bg-black border-white text-warning focus-ring-warning focus-ring " id="inputCusContact" name="cusContact">
+                    <input type="tel"
+                           class="form-control bg-black border-white text-warning focus-ring-warning focus-ring "
+                           id="inputCusContact" name="cusContact">
                 </div>
                 <div class="row m-0 gap-2 mt-5">
                     <button id="btnGetAllCus" type="button" class="btn btn-light col">Get All</button>
@@ -103,14 +110,14 @@
                 </div>
 
                 <div class="row m-0 gap-2 mt-2">
-                    <button id="btnSaveCus"type="button" class="btn btn-warning  col">Save</button>
+                    <button id="btnSaveCus" type="button" class="btn btn-warning  col">Save</button>
                 </div>
                 <!--                <button type="submit" class="btn btn-outline-warning  container-fluid">Save</button>-->
                 <!--                <button type="submit" class="btn btn-outline-light disabled container-fluid">Update</button>-->
             </form>
         </div>
         <div class="col border-white m-3  border-start">
-            <table class="table text-white" >
+            <table class="table text-white">
                 <thead class="text-warning">
                 <tr>
                     <th scope="col">ID</th>
@@ -120,39 +127,16 @@
                     <th scope="col">Action</th>
                 </tr>
                 </thead>
-                <tbody id="cusTableBody" >
+                <tbody id="cusTableBody">
                 </tbody>
             </table>
         </div>
     </section>
 </main>
 
-<!--<main id="allCustomers" class="container col">-->
-<!--    <nav aria-label="breadcrumb" class="text-white">-->
-<!--        <ol class="breadcrumb">-->
-<!--            <li class="breadcrumb-item text-white"><a href="index.html">Home</a></li>-->
-<!--            <li class="breadcrumb-item active text-white" aria-current="page">Orders</li>-->
-<!--        </ol>-->
-<!--    </nav>-->
-<!--    <section class="row  m-auto">-->
-<!--        <table class="table text-white container col">-->
-<!--            <thead class="text-warning">-->
-<!--            <tr>-->
-<!--                <th scope="col">Customer ID</th>-->
-<!--                <th scope="col">Name</th>-->
-<!--                <th scope="col">Address</th>-->
-<!--                <th scope="col">Contact</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-<!--            <tbody id="allcustomersBody">-->
-
-<!--            </tbody>-->
-<!--        </table>-->
-<!--    </section>-->
-<!--</main>-->
 
 <main id="item" class="container">
-    <section class="row p-4 m-0" >
+    <section class="row p-4 m-0">
         <nav aria-label="breadcrumb" class="text-white">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item text-white"><a href="index.html">Home</a></li>
@@ -163,33 +147,38 @@
         <!--        <h5 class="text-warning text-lg-start" >Customer Management</h5>-->
         <div class="col border-warning m-3 border rounded">
             <h5 class="text-warning text-center m-lg-3 pt-5">Add a New Item</h5>
-            <form class="m-5">
+            <form class="m-5" id="itemForm">
                 <div class="mb-3">
-                    <label for="InputID" class="form-label text-white">Item ID</label>
+                    <label for="InputItemID" class="form-label text-white">Item ID</label>
                     <input type="text" class="form-control bg-black border-white text-warning focus-ring-warning"
-                           id="InputID" readonly>
+                           id="InputItemID" name="txtItemID">
                 </div>
                 <div class="mb-3">
-                    <label for="InputDesc" class="form-label text-white">Description</label>
+                    <label for="InputItemDesc" class="form-label text-white">Description</label>
                     <input type="text"
                            class="form-control bg-black border-white text-warning focus-ring-warning focus-ring"
-                           id="InputDesc">
+                           id="InputItemDesc" name="txtItemName">
                 </div>
                 <div class="mb-3">
-                    <label for="inputUnitPrice" class="form-label text-white">Unit Price</label>
+                    <label for="inputItemUnitPrice" class="form-label text-white">Unit Price</label>
                     <input type="number"
                            class="form-control bg-black border-white text-warning focus-ring-warning focus-ring"
-                           id="inputUnitPrice">
+                           id="inputItemUnitPrice" name="txtItemPrice">
                 </div>
                 <div class="mb-3">
-                    <label for="inputQty" class="form-label text-white">Quantity</label>
+                    <label for="inputItemQty" class="form-label text-white">Quantity</label>
                     <input type="number"
                            class="form-control bg-black border-white text-warning focus-ring-warning focus-ring "
-                           id="inputQty">
+                           id="inputItemQty" name="txtItemQty">
                 </div>
                 <div class="row m-0 gap-2 mt-5">
-                    <button type="submit" class="btn btn-outline-warning  col">Save</button>
-                    <button type="submit" class="btn btn-outline-light disabled col">Update</button>
+                    <button id="btnGetAllItem" type="button" class="btn btn-light col">Get All</button>
+                    <button id="btnUpdateItem" type="button" class="btn btn-dark  col">Update</button>
+                    <button id="btnDeleteItem" type="button" class="btn btn-danger  col">Delete</button>
+                </div>
+
+                <div class="row m-0 gap-2 mt-2">
+                    <button id="btnSaveItem" type="button" class="btn btn-warning  col">Save</button>
                 </div>
                 <!--                <button type="submit" class="btn btn-outline-warning  container-fluid">Save</button>-->
                 <!--                <button type="submit" class="btn btn-outline-light disabled container-fluid">Update</button>-->
@@ -206,114 +195,7 @@
                     <th scope="col">Action</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">I-001</th>
-                    <td>Dell Monitor i12</td>
-                    <td>15000</td>
-                    <td>15</td>
-                    <td>
-                        <button type="button" class="btn btn-outline-warning">Edit</button>
-                        <button type="button" class="btn btn-outline-danger">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">I-002</th>
-                    <td>Lenovo Monitor l24</td>
-                    <td>18000</td>
-                    <td>12</td>
-                    <td>
-                        <button type="button" class="btn btn-outline-warning">Edit</button>
-                        <button type="button" class="btn btn-outline-danger">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">I-003</th>
-                    <td>CM Casing</td>
-                    <td>7000</td>
-                    <td>20</td>
-                    <td>
-                        <button type="button" class="btn btn-outline-warning">Edit</button>
-                        <button type="button" class="btn btn-outline-danger">Delete</button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th scope="row">I-004</th>
-                    <td>P47 Headset</td>
-                    <td>2000</td>
-                    <td>10</td>
-                    <td>
-                        <button type="button" class="btn btn-outline-warning">Edit</button>
-                        <button type="button" class="btn btn-outline-danger">Delete</button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th scope="row">I-005</th>
-                    <td>SDD 128GB</td>
-                    <td>5000</td>
-                    <td>30</td>
-                    <td>
-                        <button type="button" class="btn btn-outline-warning">Edit</button>
-                        <button type="button" class="btn btn-outline-danger">Delete</button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th scope="row">I-006</th>
-                    <td>SDD 256GB</td>
-                    <td>7600</td>
-                    <td>8</td>
-                    <td>
-                        <button type="button" class="btn btn-outline-warning">Edit</button>
-                        <button type="button" class="btn btn-outline-danger">Delete</button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th scope="row">I-007</th>
-                    <td>Used PC i3</td>
-                    <td>25000</td>
-                    <td>07</td>
-                    <td>
-                        <button type="button" class="btn btn-outline-warning">Edit</button>
-                        <button type="button" class="btn btn-outline-danger">Delete</button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th scope="row">I-008</th>
-                    <td>Used PC i5</td>
-                    <td>32000</td>
-                    <td>15</td>
-                    <td>
-                        <button type="button" class="btn btn-outline-warning">Edit</button>
-                        <button type="button" class="btn btn-outline-danger">Delete</button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th scope="row">I-009</th>
-                    <td>PL Keyboard</td>
-                    <td>1200</td>
-                    <td>20</td>
-                    <td>
-                        <button type="button" class="btn btn-outline-warning">Edit</button>
-                        <button type="button" class="btn btn-outline-danger">Delete</button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th scope="row">I-010</th>
-                    <td>GL Mouse</td>
-                    <td>850</td>
-                    <td>15</td>
-                    <td>
-                        <button type="button" class="btn btn-outline-warning">Edit</button>
-                        <button type="button" class="btn btn-outline-danger">Delete</button>
-                    </td>
-                </tr>
+                <tbody id="tblItems">
 
                 </tbody>
             </table>
@@ -616,84 +498,7 @@
 
 <script src="assets/js/bootstrap.js"></script>
 <script src="assets/jquery-3.7.0.min.js"></script>
-<!--<script>-->
-
-<!--    let cusID;-->
-<!--    let cusName;-->
-<!--    let cusAddress;-->
-<!--    let cusContact;-->
-
-<!--    // let customerIds;-->
-<!--    // let customerNames;-->
-<!--    // let customerAddresses;-->
-<!--    // let customercontacts;-->
-<!--    let tr;-->
-<!--    let getCustr;-->
-
-<!--    let customerDetails;-->
-<!--    let allCustomers=[];-->
-
-<!--    $("#btnSaveCus").click(function () {-->
-<!--        cusID=$('#InputCID').val();-->
-<!--        cusName=$('#InputCusName').val();-->
-<!--        cusAddress=$('#inputCusAddress').val();-->
-<!--        cusContact=$('#inputCusContact').val();-->
-
-<!--        console.log(cusID,cusName,cusAddress,cusContact);-->
-
-<!--        let customerDetail={-->
-<!--            ID:cusID,-->
-<!--            name:cusName,-->
-<!--            address:cusAddress,-->
-<!--            contact:cusContact-->
-
-<!--        }-->
-
-<!--        //customerDetails=[cusID,cusName,cusAddress,cusContact];-->
-<!--        allCustomers.push(customerDetail);-->
-
-<!--        console.log(allCustomers);-->
-
-<!--        // customerIds=[cusID].push();-->
-<!--        // customerNames=[cusName].push();-->
-<!--        // customerAddresses=[cusAddress].push();-->
-<!--        // customercontacts=[cusContact].push();-->
-
-<!--        //for (let i=0; i<=customerIds.length; i++){-->
-<!--            tr=$('<tr> <td>'+customerDetail.ID+'</td> <td>'+customerDetail.name+'</td> <td>'+customerDetail.address+'</td> <td>'+customerDetail.contact+'</td></tr>');-->
-
-<!--        //}-->
-<!--        $("#cusTableBody").append(tr)-->
-
-<!--        // let tr=$('<tr> <td>'+cusID+'</td> <td>'+cusName+'</td> <td>'+cusAddress+'</td> <td>'+cusContact+'</td></tr>');-->
-<!--        // $("#cusTableBody").append(tr)-->
-<!--    });-->
-
-<!--    $('#btnGetAllCus').click(function () {-->
-<!--        document.getElementById("home").style.display="none";-->
-<!--        document.getElementById("customer").style.display="none";-->
-<!--        document.getElementById("item").style.display="none";-->
-<!--        document.getElementById("orders").style.display="none";-->
-<!--        document.getElementById("placeOrder").style.display="none";-->
-<!--        document.getElementById("allCustomers").style.display="block";-->
-
-<!--        for (let i=0; i<=allCustomers.length; i++){-->
-<!--        getCustr=$('<tr> <td>'+allCustomers[[i][0]]+'</td> <td>'+allCustomers[[i][1]]+'</td> <td>'+allCustomers[[i][2]]+'</td> <td>'+allCustomers[[i][3]]+'</td></tr>');-->
-
-<!--        }-->
-<!--        $("#allcustomersBody").append(getCustr)-->
-<!--    });-->
-
-
-<!--    -->
-
-<!--</script>-->
-
 <script>
-
-
-
-
     //hide and show functions of pages-->
 
     $('#home').show();
@@ -712,152 +517,296 @@
         getAllCustomers();
     });
 
-$('#btnItem').click(function () {
-    $('#home').hide();
-    $('#customer').hide();
-    $('#item').show();
-    $('#orders').hide();
-    $('#placeOrder').hide();
-});
+    $('#btnItem').click(function () {
+        $('#home').hide();
+        $('#customer').hide();
+        $('#item').show();
+        $('#orders').hide();
+        $('#placeOrder').hide();
 
-$('#btnOrders').click(function () {
-    $('#home').hide();
-    $('#customer').hide();
-    $('#item').hide();
-    $('#orders').show();
-    $('#placeOrder').hide();
-});
-
-$('#btnPlaceOrder').click(function () {
-    $('#home').hide();
-    $('#customer').hide();
-    $('#item').hide();
-    $('#orders').hide();
-    $('#placeOrder').show();
-});
-
-
-// customer -----------
-
-// get all customers
-
-$('#btnGetAllCus').click(function () {
-    getAllCustomers();
-})
-function getAllCustomers() {
-    $("#cusTableBody").empty();
-    <!--send ajax request to the customer servlet using jQuery-->
-    $.ajax({
-        url: 'http://localhost:8080/JavaEE_Pos/customer',
-        dataType: "json",
-        success: function (customers) {
-            for (let i in customers) {
-                let cus = customers[i];
-                let id = cus.id;
-                let name = cus.name;
-                let address = cus.address;
-                let contact =cus.contact;
-                let row = `<tr><td>${id}</td><td>${name}</td><td>${address}</td><td>${contact}</td></tr>`;
-                $("#cusTableBody").append(row);
-                bindTrEvents();
-            }
-        },
-        error: function (error) {
-            console.log(error);
-        }
+        getAllItems();
     });
 
-}
+    $('#btnOrders').click(function () {
+        $('#home').hide();
+        $('#customer').hide();
+        $('#item').hide();
+        $('#orders').show();
+        $('#placeOrder').hide();
+    });
 
-function bindTrEvents() {
-    $('#cusTableBody>tr').click(function () {
-        //get the selected rows data
-        let id = $(this).children().eq(0).text();
-        let name = $(this).children().eq(1).text();
-        let address = $(this).children().eq(2).text();
-        let contact = $(this).children().eq(3).text();
+    $('#btnPlaceOrder').click(function () {
+        $('#home').hide();
+        $('#customer').hide();
+        $('#item').hide();
+        $('#orders').hide();
+        $('#placeOrder').show();
+    });
 
-        //set the selected rows data to the input fields
-        $("#InputCID").val(id);
-        $("#InputCusName").val(name);
-        $("#inputCusAddress").val(address);
-        $("#inputCusContact").val(contact);
+
+    // ------------------------------------------------ customer -------------------------------------------------------
+
+    // get all customers
+
+    $('#btnGetAllCus').click(function () {
+        getAllCustomers();
     })
-}
 
-$("#btnSaveCus").click(function () {
-    let formData = $("#customerForm").serialize();
-    $.ajax({
-        url: 'http://localhost:8080/JavaEE_Pos/customer',
-        method: "post",
-        data: formData,
-        success: function (res) {
-            console.log(res);
-            alert(res.message);
-            getAllCustomers();
-        },
-        error: function (error) {
-            console.log(error.responseJSON);
-            alert(error.responseJSON.message);
-        }
-    });
+    function getAllCustomers() {
+        $("#cusTableBody").empty();
+        <!--send ajax request to the customer servlet using jQuery-->
+        $.ajax({
+            url: 'http://localhost:8080/JavaEE_Pos/customer',
+            dataType: "json",
+            success: function (customers) {
+                for (let i in customers) {
+                    let cus = customers[i];
+                    let id = cus.id;
+                    let name = cus.name;
+                    let address = cus.address;
+                    let contact = cus.contact;
+                    let row = `<tr><td>${id}</td><td>${name}</td><td>${address}</td><td>${contact}</td></tr>`;
+                    $("#cusTableBody").append(row);
+                    bindTrEvents();
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
 
-});
-
-$("#btnUpdateCus").click(function () {
-
-    let id = $("#InputCID").val();
-    let name = $("#InputCusName").val();
-    let address = $("#inputCusAddress").val();
-    let contact = $("#inputCusContact").val();
-
-    //json object
-    let a = {
-        "cusID": id,
-        "cusName": name,
-        "cusAddress": address,
-        "cusContact": contact
     }
 
 
-    $.ajax({
-        url: 'http://localhost:8080/JavaEE_Pos/customer',
-        method: 'put',
-        origin:"*",
-        // header: "Access-Control-Allow-Origin",
-        setRequestHeader :"Access-Control-Allow-Origin",
-        contentType:"application/json",
-        data:JSON.stringify(a),
-        success: function (resp) {
-            getAllCustomers();
-            alert(resp.message);
-        },
-        error: function (error) {
-            alert(error.responseJSON.message);
-        }
+    //bind event customer table
+    function bindTrEvents() {
+        $('#cusTableBody>tr').click(function () {
+            //get the selected rows data
+            let id = $(this).children().eq(0).text();
+            let name = $(this).children().eq(1).text();
+            let address = $(this).children().eq(2).text();
+            let contact = $(this).children().eq(3).text();
+
+            //set the selected rows data to the input fields
+            $("#InputCID").val(id);
+            $("#InputCusName").val(name);
+            $("#inputCusAddress").val(address);
+            $("#inputCusContact").val(contact);
+        })
+    }
+
+    //customer save
+
+    $("#btnSaveCus").click(function () {
+        let formData = $("#customerForm").serialize();
+        $.ajax({
+            url: 'http://localhost:8080/JavaEE_Pos/customer',
+            method: "post",
+            data: formData,
+            success: function (res) {
+                console.log(res);
+                alert(res.message);
+                getAllCustomers();
+            },
+            error: function (error) {
+                console.log(error.responseJSON);
+                alert(error.responseJSON.message);
+            }
+        });
+
     });
-});
+
+    //customer update
+
+    $("#btnUpdateCus").click(function () {
+
+        let id = $("#InputCID").val();
+        let name = $("#InputCusName").val();
+        let address = $("#inputCusAddress").val();
+        let contact = $("#inputCusContact").val();
+
+        //json object
+        let a = {
+            "cusID": id,
+            "cusName": name,
+            "cusAddress": address,
+            "cusContact": contact
+        }
+
+
+        $.ajax({
+            url: 'http://localhost:8080/JavaEE_Pos/customer',
+            method: 'put',
+            origin: "*",
+            // header: "Access-Control-Allow-Origin",
+            setRequestHeader: "Access-Control-Allow-Origin",
+            contentType: "application/json",
+            data: JSON.stringify(a),
+            success: function (resp) {
+                getAllCustomers();
+                alert(resp.message);
+            },
+            error: function (error) {
+                alert(error.responseJSON.message);
+            }
+        });
+    });
+
+
+    //customer delete
 
     $("#btnDeleteCus").click(function () {
         console.log("clicked");
         let cusID = $('#InputCID').val();
 
         $.ajax({
-            url:'http://localhost:8080/JavaEE_Pos/customer?cusID='+cusID,
-            type:"DELETE",
-            dataType:"json",
+            url: 'http://localhost:8080/JavaEE_Pos/customer?cusID=' + cusID,
+            type: "DELETE",
+            dataType: "json",
             contentType: "application/json",
             // data:JSON.stringify(cusID),
-            success:function (res) {
+            success: function (res) {
                 getAllCustomers()
                 alert(res.message);
             },
-            error:function (error){
+            error: function (error) {
                 alert(error.message)
             }
         })
     });
 
+
+
+    // ------------------------------------------------ item -------------------------------------------------------
+
+    // get all items
+
+    $('#btnGetAllItem').click(function () {
+        getAllItems();
+    })
+
+    function getAllItems() {
+        $("#tblItems").empty();
+        <!--send ajax request to the item servlet using jQuery-->
+        $.ajax({
+            url: 'http://localhost:8080/JavaEE_Pos/item',
+            dataType: "json",
+            success: function (items) {
+                for (let i in items) {
+                    let item = items[i];
+                    let code = item.code;
+                    let desc = item.desc;
+                    let unitPrice = item.unitPrice;
+                    let qty = item.qty;
+                    let row = `<tr><td>${code}</td><td>${desc}</td><td>${unitPrice}</td><td>${qty}</td></tr>`;
+                    $("#tblItems").append(row);
+                    bindTrEventsItem();
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+
+    }
+
+
+    //bind event item table
+    function bindTrEventsItem() {
+        $('#tblItems>tr').click(function () {
+            //get the selected rows data
+            let code = $(this).children().eq(0).text();
+            let desc = $(this).children().eq(1).text();
+            let unitPrice = $(this).children().eq(2).text();
+            let qty = $(this).children().eq(3).text();
+
+            //set the selected rows data to the input fields
+            $("#InputItemID").val(code);
+            $("#InputItemDesc").val(desc);
+            $("#inputItemUnitPrice").val(unitPrice);
+            $("#inputItemQty").val(qty);
+        })
+    }
+
+    //customer save
+
+    $("#btnSaveItem").click(function () {
+        let formData = $("#itemForm").serialize();
+        $.ajax({
+            url: 'http://localhost:8080/JavaEE_Pos/item',
+            method: "post",
+            data: formData,
+            success: function (res) {
+                console.log(res);
+                alert(res.message);
+                getAllItems();
+            },
+            error: function (error) {
+                console.log(error.responseJSON);
+                alert(error.responseJSON.message);
+            }
+        });
+
+    });
+
+    //customer update
+
+    $("#btnUpdateItem").click(function () {
+
+        let code = $("#InputItemID").val();
+        let desc = $("#InputItemDesc").val();
+        let unitPrice = $("#inputItemUnitPrice").val();
+        let qty = $("#inputItemQty").val();
+
+        //json object
+        let a = {
+            "code": code,
+            "desc": desc,
+            "unitPrice": unitPrice,
+            "qty": qty
+        }
+
+
+        $.ajax({
+            url: 'http://localhost:8080/JavaEE_Pos/item',
+            method: 'put',
+            origin: "*",
+            // header: "Access-Control-Allow-Origin",
+            setRequestHeader: "Access-Control-Allow-Origin",
+            contentType: "application/json",
+            data: JSON.stringify(a),
+            success: function (resp) {
+                getAllItems();
+                alert(resp.message);
+            },
+            error: function (error) {
+                alert(error.responseJSON.message);
+            }
+        });
+    });
+
+
+    //customer delete
+
+    $("#btnDeleteItem").click(function () {
+        console.log("clicked");
+        let code = $('#InputItemID').val();
+
+        $.ajax({
+            url: 'http://localhost:8080/JavaEE_Pos/item?code=' + code,
+            type: "DELETE",
+            dataType: "json",
+            contentType: "application/json",
+            // data:JSON.stringify(cusID),
+            success: function (res) {
+                getAllItems();
+                alert(res.message);
+            },
+            error: function (error) {
+                alert(error.message)
+            }
+        })
+    });
 
 
 </script>

@@ -9,11 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12c2b270-d4a2-46b9-ac74-0d74d257e5e0" name="Changes" comment="customer update">
+    <list default="true" id="12c2b270-d4a2-46b9-ac74-0d74d257e5e0" name="Changes" comment="customer crud finished">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back_End/src/servlet/CustomerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/src/servlet/CustomerServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back_End/src/servlet/ItemServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/src/servlet/ItemServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Front_End/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Front_End/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Back_End/servlet/CustomerServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Back_End/servlet/CustomerServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Back_End/servlet/ItemServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Back_End/servlet/ItemServlet.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +175,7 @@
       <option name="presentableId" value="Default" />
       <updated>1692795483611</updated>
       <workItem from="1692795486155" duration="4802000" />
-      <workItem from="1692857147117" duration="13382000" />
+      <workItem from="1692857147117" duration="18361000" />
     </task>
     <task id="LOCAL-00001" summary="fornt end">
       <created>1692796359252</created>
@@ -219,7 +219,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692890784732</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="customer crud finished">
+      <created>1692891602382</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1692891602382</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,6 +238,7 @@
     <MESSAGE value="database created" />
     <MESSAGE value="customer getall and save" />
     <MESSAGE value="customer update" />
-    <option name="LAST_COMMIT_MESSAGE" value="customer update" />
+    <MESSAGE value="customer crud finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="customer crud finished" />
   </component>
 </project>
