@@ -98,7 +98,7 @@
                 </div>
                 <div class="row m-0 gap-2 mt-5">
                     <button id="btnSaveCus"type="button" class="btn btn-outline-warning  col">Save</button>
-                    <button type="submit" class="btn btn-outline-light disabled col">Update</button>
+                    <button id="btnUpdateCus" type="button" class="btn btn-outline-light  col">Update</button>
                     <button id="btnGetAllCus" type="button" class="btn btn-outline-light col">Get All</button>
                 </div>
                 <!--                <button type="submit" class="btn btn-outline-warning  container-fluid">Save</button>-->
@@ -689,7 +689,8 @@
 
 
 
-<!--    hide and show functions of pages-->
+
+    //hide and show functions of pages-->
 
     $('#home').show();
     $('#customer').hide();
@@ -754,12 +755,30 @@ function getAllCustomers() {
                 let contact =cus.contact;
                 let row = `<tr><td>${id}</td><td>${name}</td><td>${address}</td><td>${contact}</td></tr>`;
                 $("#cusTableBody").append(row);
+                bindTrEvents();
             }
         },
         error: function (error) {
             console.log(error);
         }
     });
+
+}
+
+function bindTrEvents() {
+    $('#cusTableBody>tr').click(function () {
+        //get the selected rows data
+        let id = $(this).children().eq(0).text();
+        let name = $(this).children().eq(1).text();
+        let address = $(this).children().eq(2).text();
+        let contact = $(this).children().eq(3).text();
+
+        //set the selected rows data to the input fields
+        $("#InputCID").val(id);
+        $("#InputCusName").val(name);
+        $("#inputCusAddress").val(address);
+        $("#inputCusContact").val(contact);
+    })
 }
 
 $("#btnSaveCus").click(function () {
@@ -779,6 +798,36 @@ $("#btnSaveCus").click(function () {
         }
     });
 
+});
+
+$("#btnUpdateCus").click(function () {
+
+    let id = $("#InputCID").val();
+    let name = $("#InputCusName").val();
+    let address = $("#inputCusAddress").val();
+    let contact = $("#inputCusContact").val();
+
+    //json object
+    let a = {
+        "cusID": id,
+        "cusName": name,
+        "cusAddress": address,
+        "cusContact": contact
+    }
+
+
+    $.ajax({
+        url: 'http://localhost:8080/JavaEE_Pos/customer',
+        method: 'put',
+        origin:"*",
+        // header: "Access-Control-Allow-Origin",
+        setRequestHeader :"Access-Control-Allow-Origin",
+        contentType:"application/json",
+        data:JSON.stringify(a),
+        success: function (resp) {
+            getAllCustomers();
+        }
+    });
 });
 
 
