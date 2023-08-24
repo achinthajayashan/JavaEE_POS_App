@@ -36,7 +36,7 @@
                         <a class="nav-link text-white" >Orders</a>
                     </li>
                     <li id="btnPlaceOrder" class="nav-item ms-4">
-                        <a class="nav-link border-warning border rounded text-white" >Place New
+                        <a class="nav-link border-warning border bg-warning rounded text-black" >Place New
                             Order</a>
                     </li>
                 </ul>
@@ -79,22 +79,22 @@
         <!--        <h5 class="text-warning text-lg-start" >Customer Management</h5>-->
         <div class="col border-warning m-3 border rounded object-fit-contain">
             <h5 class="text-warning text-center m-lg-3 pt-5" >Add a New Customer</h5>
-            <form class="m-5">
+            <form class="m-5" id="customerForm">
                 <div class="mb-3">
                     <label for="InputCID" class="form-label text-white">Customer ID</label>
-                    <input type="text" class="form-control bg-black border-white text-warning focus-ring-warning" id="InputCID" >
+                    <input type="text" class="form-control bg-black border-white text-warning focus-ring-warning" id="InputCID" name="cusID">
                 </div>
                 <div class="mb-3">
                     <label for="InputCusName" class="form-label text-white">Name</label>
-                    <input type="text" class="form-control bg-black border-white text-warning focus-ring-warning focus-ring" id="InputCusName">
+                    <input type="text" class="form-control bg-black border-white text-warning focus-ring-warning focus-ring" id="InputCusName" name="cusName">
                 </div>
                 <div class="mb-3">
                     <label for="inputCusAddress" class="form-label text-white">Address</label>
-                    <input type="text" class="form-control bg-black border-white text-warning focus-ring-warning focus-ring" id="inputCusAddress">
+                    <input type="text" class="form-control bg-black border-white text-warning focus-ring-warning focus-ring" id="inputCusAddress" name="cusAddress">
                 </div>
                 <div class="mb-3">
                     <label for="inputCusContact" class="form-label text-white">Contact</label>
-                    <input type="tel" class="form-control bg-black border-white text-warning focus-ring-warning focus-ring " id="inputCusContact">
+                    <input type="tel" class="form-control bg-black border-white text-warning focus-ring-warning focus-ring " id="inputCusContact" name="cusContact">
                 </div>
                 <div class="row m-0 gap-2 mt-5">
                     <button id="btnSaveCus"type="button" class="btn btn-outline-warning  col">Save</button>
@@ -123,29 +123,29 @@
     </section>
 </main>
 
-<main id="allCustomers" class="container col">
-    <nav aria-label="breadcrumb" class="text-white">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item text-white"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active text-white" aria-current="page">Orders</li>
-        </ol>
-    </nav>
-    <section class="row  m-auto">
-        <table class="table text-white container col">
-            <thead class="text-warning">
-            <tr>
-                <th scope="col">Customer ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Address</th>
-                <th scope="col">Contact</th>
-            </tr>
-            </thead>
-            <tbody id="allcustomersBody">
+<!--<main id="allCustomers" class="container col">-->
+<!--    <nav aria-label="breadcrumb" class="text-white">-->
+<!--        <ol class="breadcrumb">-->
+<!--            <li class="breadcrumb-item text-white"><a href="index.html">Home</a></li>-->
+<!--            <li class="breadcrumb-item active text-white" aria-current="page">Orders</li>-->
+<!--        </ol>-->
+<!--    </nav>-->
+<!--    <section class="row  m-auto">-->
+<!--        <table class="table text-white container col">-->
+<!--            <thead class="text-warning">-->
+<!--            <tr>-->
+<!--                <th scope="col">Customer ID</th>-->
+<!--                <th scope="col">Name</th>-->
+<!--                <th scope="col">Address</th>-->
+<!--                <th scope="col">Contact</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody id="allcustomersBody">-->
 
-            </tbody>
-        </table>
-    </section>
-</main>
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </section>-->
+<!--</main>-->
 
 <main id="item" class="container">
     <section class="row p-4 m-0" >
@@ -612,123 +612,174 @@
 
 <script src="assets/js/bootstrap.js"></script>
 <script src="assets/jquery-3.7.0.min.js"></script>
+<!--<script>-->
+
+<!--    let cusID;-->
+<!--    let cusName;-->
+<!--    let cusAddress;-->
+<!--    let cusContact;-->
+
+<!--    // let customerIds;-->
+<!--    // let customerNames;-->
+<!--    // let customerAddresses;-->
+<!--    // let customercontacts;-->
+<!--    let tr;-->
+<!--    let getCustr;-->
+
+<!--    let customerDetails;-->
+<!--    let allCustomers=[];-->
+
+<!--    $("#btnSaveCus").click(function () {-->
+<!--        cusID=$('#InputCID').val();-->
+<!--        cusName=$('#InputCusName').val();-->
+<!--        cusAddress=$('#inputCusAddress').val();-->
+<!--        cusContact=$('#inputCusContact').val();-->
+
+<!--        console.log(cusID,cusName,cusAddress,cusContact);-->
+
+<!--        let customerDetail={-->
+<!--            ID:cusID,-->
+<!--            name:cusName,-->
+<!--            address:cusAddress,-->
+<!--            contact:cusContact-->
+
+<!--        }-->
+
+<!--        //customerDetails=[cusID,cusName,cusAddress,cusContact];-->
+<!--        allCustomers.push(customerDetail);-->
+
+<!--        console.log(allCustomers);-->
+
+<!--        // customerIds=[cusID].push();-->
+<!--        // customerNames=[cusName].push();-->
+<!--        // customerAddresses=[cusAddress].push();-->
+<!--        // customercontacts=[cusContact].push();-->
+
+<!--        //for (let i=0; i<=customerIds.length; i++){-->
+<!--            tr=$('<tr> <td>'+customerDetail.ID+'</td> <td>'+customerDetail.name+'</td> <td>'+customerDetail.address+'</td> <td>'+customerDetail.contact+'</td></tr>');-->
+
+<!--        //}-->
+<!--        $("#cusTableBody").append(tr)-->
+
+<!--        // let tr=$('<tr> <td>'+cusID+'</td> <td>'+cusName+'</td> <td>'+cusAddress+'</td> <td>'+cusContact+'</td></tr>');-->
+<!--        // $("#cusTableBody").append(tr)-->
+<!--    });-->
+
+<!--    $('#btnGetAllCus').click(function () {-->
+<!--        document.getElementById("home").style.display="none";-->
+<!--        document.getElementById("customer").style.display="none";-->
+<!--        document.getElementById("item").style.display="none";-->
+<!--        document.getElementById("orders").style.display="none";-->
+<!--        document.getElementById("placeOrder").style.display="none";-->
+<!--        document.getElementById("allCustomers").style.display="block";-->
+
+<!--        for (let i=0; i<=allCustomers.length; i++){-->
+<!--        getCustr=$('<tr> <td>'+allCustomers[[i][0]]+'</td> <td>'+allCustomers[[i][1]]+'</td> <td>'+allCustomers[[i][2]]+'</td> <td>'+allCustomers[[i][3]]+'</td></tr>');-->
+
+<!--        }-->
+<!--        $("#allcustomersBody").append(getCustr)-->
+<!--    });-->
+
+
+<!--    -->
+
+<!--</script>-->
+
 <script>
-    document.getElementById("customer").style.display="none";
-    document.getElementById("item").style.display="none";
-    document.getElementById("orders").style.display="none";
-    document.getElementById("placeOrder").style.display="none";
-    document.getElementById("allCustomers").style.display="none";
 
-    document.getElementById("btnCustomer").addEventListener("click",function (){
-        document.getElementById("home").style.display="none";
-        document.getElementById("customer").style.display="block";
-        document.getElementById("item").style.display="none";
-        document.getElementById("orders").style.display="none";
-        document.getElementById("placeOrder").style.display="none";
-        document.getElementById("allCustomers").style.display="none";
+
+
+<!--    hide and show functions of pages-->
+
+    $('#home').show();
+    $('#customer').hide();
+    $('#item').hide();
+    $('#orders').hide();
+    $('#placeOrder').hide();
+
+    $('#btnCustomer').click(function () {
+        $('#home').hide();
+        $('#customer').show();
+        $('#item').hide();
+        $('#orders').hide();
+        $('#placeOrder').hide();
+
+        getAllCustomers();
     });
 
-    document.getElementById("btnItem").addEventListener("click",function (){
-        document.getElementById("home").style.display="none";
-        document.getElementById("customer").style.display="none";
-        document.getElementById("item").style.display="block";
-        document.getElementById("orders").style.display="none";
-        document.getElementById("placeOrder").style.display="none";
-        document.getElementById("allCustomers").style.display="none";
-    });
+$('#btnItem').click(function () {
+    $('#home').hide();
+    $('#customer').hide();
+    $('#item').show();
+    $('#orders').hide();
+    $('#placeOrder').hide();
+});
 
-    document.getElementById("btnOrders").addEventListener("click",function (){
-        document.getElementById("home").style.display="none";
-        document.getElementById("customer").style.display="none";
-        document.getElementById("item").style.display="none";
-        document.getElementById("orders").style.display="block";
-        document.getElementById("placeOrder").style.display="none";
-        document.getElementById("allCustomers").style.display="none";
-    });
+$('#btnOrders').click(function () {
+    $('#home').hide();
+    $('#customer').hide();
+    $('#item').hide();
+    $('#orders').show();
+    $('#placeOrder').hide();
+});
 
-    document.getElementById("btnPlaceOrder").addEventListener("click",function (){
-        document.getElementById("home").style.display="none";
-        document.getElementById("customer").style.display="none";
-        document.getElementById("item").style.display="none";
-        document.getElementById("orders").style.display="none";
-        document.getElementById("placeOrder").style.display="block";
-        document.getElementById("allCustomers").style.display="none";
-    });
+$('#btnPlaceOrder').click(function () {
+    $('#home').hide();
+    $('#customer').hide();
+    $('#item').hide();
+    $('#orders').hide();
+    $('#placeOrder').show();
+});
 
-    document.getElementById("btnHome").addEventListener("click",function (){
-        document.getElementById("home").style.display="block";
-        document.getElementById("customer").style.display="none";
-        document.getElementById("item").style.display="none";
-        document.getElementById("orders").style.display="none";
-        document.getElementById("placeOrder").style.display="none";
-        document.getElementById("allCustomers").style.display="none";
-    });
 
-    let cusID;
-    let cusName;
-    let cusAddress;
-    let cusContact;
+// customer -----------
 
-    // let customerIds;
-    // let customerNames;
-    // let customerAddresses;
-    // let customercontacts;
-    let tr;
-    let getCustr;
+// get all customers
 
-    let customerDetails;
-    let allCustomers=[];
-
-    $("#btnSaveCus").click(function () {
-        cusID=$('#InputCID').val();
-        cusName=$('#InputCusName').val();
-        cusAddress=$('#inputCusAddress').val();
-        cusContact=$('#inputCusContact').val();
-
-        console.log(cusID,cusName,cusAddress,cusContact);
-
-        let customerDetail={
-            ID:cusID,
-            name:cusName,
-            address:cusAddress,
-            contact:cusContact
-
+$('#btnGetAllCus').click(function () {
+    getAllCustomers();
+})
+function getAllCustomers() {
+    $("#cusTableBody").empty();
+    <!--send ajax request to the customer servlet using jQuery-->
+    $.ajax({
+        url: 'http://localhost:8080/JavaEE_Pos/customer',
+        dataType: "json",
+        success: function (customers) {
+            for (let i in customers) {
+                let cus = customers[i];
+                let id = cus.id;
+                let name = cus.name;
+                let address = cus.address;
+                let contact =cus.contact;
+                let row = `<tr><td>${id}</td><td>${name}</td><td>${address}</td><td>${contact}</td></tr>`;
+                $("#cusTableBody").append(row);
+            }
+        },
+        error: function (error) {
+            console.log(error);
         }
-
-        //customerDetails=[cusID,cusName,cusAddress,cusContact];
-        allCustomers.push(customerDetail);
-
-        console.log(allCustomers);
-
-        // customerIds=[cusID].push();
-        // customerNames=[cusName].push();
-        // customerAddresses=[cusAddress].push();
-        // customercontacts=[cusContact].push();
-
-        //for (let i=0; i<=customerIds.length; i++){
-            tr=$('<tr> <td>'+customerDetail.ID+'</td> <td>'+customerDetail.name+'</td> <td>'+customerDetail.address+'</td> <td>'+customerDetail.contact+'</td></tr>');
-
-        //}
-        $("#cusTableBody").append(tr)
-
-        // let tr=$('<tr> <td>'+cusID+'</td> <td>'+cusName+'</td> <td>'+cusAddress+'</td> <td>'+cusContact+'</td></tr>');
-        // $("#cusTableBody").append(tr)
     });
+}
 
-    $('#btnGetAllCus').click(function () {
-        document.getElementById("home").style.display="none";
-        document.getElementById("customer").style.display="none";
-        document.getElementById("item").style.display="none";
-        document.getElementById("orders").style.display="none";
-        document.getElementById("placeOrder").style.display="none";
-        document.getElementById("allCustomers").style.display="block";
-
-        for (let i=0; i<=allCustomers.length; i++){
-        getCustr=$('<tr> <td>'+allCustomers[[i][0]]+'</td> <td>'+allCustomers[[i][1]]+'</td> <td>'+allCustomers[[i][2]]+'</td> <td>'+allCustomers[[i][3]]+'</td></tr>');
-
+$("#btnSaveCus").click(function () {
+    let formData = $("#customerForm").serialize();
+    $.ajax({
+        url: 'http://localhost:8080/JavaEE_Pos/customer',
+        method: "post",
+        data: formData,
+        success: function (res) {
+            console.log(res);
+            alert(res.message);
+            getAllCustomers();
+        },
+        error: function (error) {
+            console.log(error.responseJSON);
+            alert(error.responseJSON.message);
         }
-        $("#allcustomersBody").append(getCustr)
     });
+
+});
 
 
 

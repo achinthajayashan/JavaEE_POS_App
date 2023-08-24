@@ -12,6 +12,7 @@
           <element id="module-output" name="Back_End" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="Back_End/web/WebFacet" />
     </root>
   </artifact>
 </component>
