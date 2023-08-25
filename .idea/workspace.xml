@@ -9,11 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12c2b270-d4a2-46b9-ac74-0d74d257e5e0" name="Changes" comment="order parse to servlet">
+    <list default="true" id="12c2b270-d4a2-46b9-ac74-0d74d257e5e0" name="Changes" comment="place order done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Back_End/src/servlet/PurchaseOrderServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/src/servlet/PurchaseOrderServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Front_End/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Front_End/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Back_End/servlet/PurchaseOrderServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Back_End/servlet/PurchaseOrderServlet.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +175,7 @@
       <updated>1692795483611</updated>
       <workItem from="1692795486155" duration="4802000" />
       <workItem from="1692857147117" duration="19800000" />
-      <workItem from="1692939944928" duration="26759000" />
+      <workItem from="1692939944928" duration="28109000" />
     </task>
     <task id="LOCAL-00001" summary="fornt end">
       <created>1692796359252</created>
@@ -276,7 +275,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692974434158</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="place order done">
+      <created>1692979448358</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1692979448358</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -295,6 +301,7 @@
     <MESSAGE value="total of cart" />
     <MESSAGE value="balance set" />
     <MESSAGE value="order parse to servlet" />
-    <option name="LAST_COMMIT_MESSAGE" value="order parse to servlet" />
+    <MESSAGE value="place order done" />
+    <option name="LAST_COMMIT_MESSAGE" value="place order done" />
   </component>
 </project>

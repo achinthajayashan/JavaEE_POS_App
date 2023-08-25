@@ -7,13 +7,52 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.io.PrintWriter;
+import java.sql.*;
 
 @WebServlet(urlPatterns = "/placeOrder")
 public class PurchaseOrderServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee_pos_app", "root", "12345678");
+            PreparedStatement pstm = connection.prepareStatement("select * from orders");
+            ResultSet rst = pstm.executeQuery();
+            PrintWriter writer = resp.getWriter();
+            resp.addHeader("Access-Control-Allow-Origin","*");
+            resp.addHeader("Content-Type","application/json");
+
+            JsonArrayBuilder allCustomers = Json.createArrayBuilder();
+
+
+            while (rst.next()) {
+                String orderID = rst.getString(1);
+                String orderCusID = rst.getString(2);
+                String orderDate = rst.getString(3);
+//                String contact = String.valueOf(rst.getInt(4));
+
+                JsonObjectBuilder customer = Json.createObjectBuilder();
+
+                customer.add("orderID",orderID);
+                customer.add("orderCusID",orderCusID);
+                customer.add("orderDate",orderDate);
+//                customer.add("contact",contact);
+
+                allCustomers.add(customer.build());
+            }
+
+            writer.print(allCustomers.build());
+
+
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.addHeader("Access-Control-Allow-Origin","*");
@@ -56,6 +95,7 @@ public class PurchaseOrderServlet extends HttpServlet {
             resp.addHeader("Content-Type", "application/json");
 
             if (pstm.executeUpdate() > 0) {
+
                 for (int i = 0; i < oCartItems.size(); i++) {
                     PreparedStatement pstm2 = connection.prepareStatement("insert into order_detail values(?,?,?,?)");
                     pstm2.setObject(1, oCartItems.getJsonArray(i).getString(0));
@@ -73,12 +113,6 @@ public class PurchaseOrderServlet extends HttpServlet {
                     }
 
                 }
-
-//                JsonObjectBuilder response = Json.createObjectBuilder();
-//                response.add("state", "Ok");
-//                response.add("message", "Successfully Added.!");
-//                response.add("data", "");
-//                resp.getWriter().print(response.build());
             }
 
         } catch (ClassNotFoundException e) {
@@ -107,5 +141,10 @@ public class PurchaseOrderServlet extends HttpServlet {
     protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.addHeader("Access-Control-Allow-Origin","*");
         resp.addHeader("Access-Control-Allow-Headers","content-type");
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPut(req, resp);
     }
 }

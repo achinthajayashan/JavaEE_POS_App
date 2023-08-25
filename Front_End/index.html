@@ -223,74 +223,7 @@
                 <th scope="col">Action</th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <th scope="row">O-001</th>
-                <td>2023-05-17</td>
-                <td>C-001</td>
-                <td>I-001</td>
-                <td>2</td>
-                <td>1000</td>
-                <td>30000</td>
-                <td>
-                    <button type="button" class="btn btn-outline-warning">Edit</button>
-                    <button type="button" class="btn btn-outline-danger">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">O-002</th>
-                <td>2023-05-17</td>
-                <td>C-001</td>
-                <td>I-001</td>
-                <td>2</td>
-                <td>1000</td>
-                <td>30000</td>
-                <td>
-                    <button type="button" class="btn btn-outline-warning">Edit</button>
-                    <button type="button" class="btn btn-outline-danger">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">O-003</th>
-                <td>2023-05-17</td>
-                <td>C-001</td>
-                <td>I-001</td>
-                <td>2</td>
-                <td>1000</td>
-                <td>30000</td>
-                <td>
-                    <button type="button" class="btn btn-outline-warning">Edit</button>
-                    <button type="button" class="btn btn-outline-danger">Delete</button>
-                </td>
-            </tr>
-
-            <tr>
-                <th scope="row">O-004</th>
-                <td>2023-05-17</td>
-                <td>C-001</td>
-                <td>I-001</td>
-                <td>2</td>
-                <td>1000</td>
-                <td>30000</td>
-                <td>
-                    <button type="button" class="btn btn-outline-warning">Edit</button>
-                    <button type="button" class="btn btn-outline-danger">Delete</button>
-                </td>
-            </tr>
-
-            <tr>
-                <th scope="row">0-005</th>
-                <td>2023-05-17</td>
-                <td>C-001</td>
-                <td>I-001</td>
-                <td>2</td>
-                <td>1000</td>
-                <td>30000</td>
-                <td>
-                    <button type="button" class="btn btn-outline-warning">Edit</button>
-                    <button type="button" class="btn btn-outline-danger">Delete</button>
-                </td>
-            </tr>
+            <tbody id="tblOrders">
 
             </tbody>
         </table>
@@ -503,6 +436,7 @@
         $('#item').hide();
         $('#orders').show();
         $('#placeOrder').hide();
+        getAllOrders()
     });
 
     $('#btnPlaceOrder').click(function () {
@@ -992,6 +926,29 @@
 
     })
 
+
+    function getAllOrders(){
+        $("#tblOrders").empty();
+        <!--send ajax request to the item servlet using jQuery-->
+        $.ajax({
+            url: 'http://localhost:8080/JavaEE_Pos/placeOrder',
+            dataType: "json",
+            success: function (orders) {
+                for (let i in orders) {
+                    let order = orders[i];
+                    let orderID = order.orderID;
+                    let orderCusName = order.orderCusID;
+                    let orderDate = order.orderDate;
+                    let row = `<tr><td>${orderID}</td><td>${orderCusName}</td><td>${orderDate}</td></tr>`;
+                    $("#tblOrders").append(row);
+                    // bindTrEventsItem();
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
 
 
 
