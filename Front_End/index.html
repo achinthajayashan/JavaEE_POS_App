@@ -422,33 +422,33 @@
                     </div>
 
                     <div class="mb-5 col text-warning">
-                        <label for="subTotal" class="form-label ">Sub Total</label>
+                        <label for="inputSubTotal" class="form-label ">Sub Total</label>
                         <input type="number"
                                class="form-control bg-black border-warning text-warning focus-ring-warning focus-ring mb-4 rounded"
-                               id="subTotal" readonly>
+                               id="inputSubTotal" readonly>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="mb-1 col">
-                        <label for="cash" class="form-label text-white">Cash</label>
+                        <label for="inputCash" class="form-label text-white">Cash</label>
                         <input type="number"
                                class="form-control bg-black border-white text-warning focus-ring-warning focus-ring "
-                               id="cash">
+                               id="inputCash">
                     </div>
 
                     <div class="mb-1 col">
-                        <label for="discount" class="form-label text-white">Discount</label>
+                        <label for="inputDiscount" class="form-label text-white">Discount</label>
                         <input type="number"
                                class="form-control bg-black border-white text-warning focus-ring-warning focus-ring "
-                               id="discount">
+                               id="inputDiscount">
                     </div>
 
                     <div class="mb-1 col">
-                        <label for="balance" class="form-label text-white">Balance</label>
+                        <label for="inputBalance" class="form-label text-white">Balance</label>
                         <input type="number"
                                class="form-control bg-black border-white text-warning focus-ring-warning focus-ring "
-                               id="balance" readonly>
+                               id="inputBalance" readonly>
                     </div>
 
                 </div>
@@ -474,6 +474,8 @@
 
     let cartItems;
     let subTotal=0;
+    let discount=0;
+    let finalTotal=0;
 
     $('#btnCustomer').click(function () {
         $('#home').hide();
@@ -913,10 +915,35 @@
 
         for (let i = 0; i <= cartItems.length; i++) {
             subTotal+=cartItems[i][4];
+             finalTotal=subTotal;
             $('#inputTotal').val(parseInt(subTotal));
+            $('#inputSubTotal').val(parseInt(finalTotal));
             console.log(parseInt(subTotal));
         }
     }
+
+    $('#inputDiscount').keydown(function (event){
+
+        if (event.key==='Enter'){
+            if ($('#inputDiscount').val()!=="0"){
+                 fullTotal = subTotal-Number($('#inputDiscount').val());
+
+                $('#inputSubTotal').val(fullTotal);
+            }
+        }
+
+    });
+
+    $('#inputCash').keydown(function (event){
+
+        if (event.key==='Enter'){
+            let balance = Number($('#inputCash').val())-Number($('#inputSubTotal').val());
+
+            $('#inputBalance').val(balance);
+            //purchaseOrder();
+        }
+
+    });
 
 
 

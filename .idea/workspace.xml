@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12c2b270-d4a2-46b9-ac74-0d74d257e5e0" name="Changes" comment="cart items to array">
+    <list default="true" id="12c2b270-d4a2-46b9-ac74-0d74d257e5e0" name="Changes" comment="total of cart">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Front_End/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Front_End/index.html" afterDir="false" />
     </list>
@@ -174,7 +174,7 @@
       <updated>1692795483611</updated>
       <workItem from="1692795486155" duration="4802000" />
       <workItem from="1692857147117" duration="19800000" />
-      <workItem from="1692939944928" duration="13665000" />
+      <workItem from="1692939944928" duration="15198000" />
     </task>
     <task id="LOCAL-00001" summary="fornt end">
       <created>1692796359252</created>
@@ -246,7 +246,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692960970678</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="total of cart">
+      <created>1692963727656</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1692963727656</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,6 +269,7 @@
     <MESSAGE value="item crud finished" />
     <MESSAGE value="cus and item ids loaded" />
     <MESSAGE value="cart items to array" />
-    <option name="LAST_COMMIT_MESSAGE" value="cart items to array" />
+    <MESSAGE value="total of cart" />
+    <option name="LAST_COMMIT_MESSAGE" value="total of cart" />
   </component>
 </project>
