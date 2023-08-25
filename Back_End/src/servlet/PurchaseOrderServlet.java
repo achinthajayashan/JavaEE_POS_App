@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 @WebServlet(urlPatterns = "/placeOrder")
 public class PurchaseOrderServlet extends HttpServlet {
@@ -27,8 +31,6 @@ public class PurchaseOrderServlet extends HttpServlet {
         JsonArray oCartItems = jsonObject.getJsonArray("oCartItems");
 
 
-
-
         System.out.println(oID);
         System.out.println(oDate);
         System.out.println(oCusID);
@@ -38,9 +40,67 @@ public class PurchaseOrderServlet extends HttpServlet {
         System.out.println(oQty);
         System.out.println(oCartItems);
 
-//        String cusName = jsonObject.getString("cusName");
-//        String cusAddress = jsonObject.getString("cusAddress");
-//        String cusContact = jsonObject.getString("cusContact");
+        for (int i = 0; i < oCartItems.size(); i++) {
+
+            System.out.println(oCartItems.getJsonArray(i).getString(0));
+        }
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee_pos_app", "root", "12345678");
+
+            PreparedStatement pstm = connection.prepareStatement("insert into orders values(?,?,?)");
+            pstm.setObject(1, oID);
+            pstm.setObject(2, oDate);
+            pstm.setObject(3, oCusID);
+            resp.addHeader("Content-Type", "application/json");
+
+            if (pstm.executeUpdate() > 0) {
+                for (int i = 0; i < oCartItems.size(); i++) {
+                    PreparedStatement pstm2 = connection.prepareStatement("insert into order_detail values(?,?,?,?)");
+                    pstm2.setObject(1, oCartItems.getJsonArray(i).getString(0));
+                    pstm2.setObject(2, oID);
+                    pstm2.setObject(3, oCartItems.getJsonArray(i).getString(3));
+                    pstm2.setObject(4, oCartItems.getJsonArray(i).getString(2));
+
+                    if (pstm2.executeUpdate()>0){
+                        resp.addHeader("Content-Type", "application/json");
+                        JsonObjectBuilder response = Json.createObjectBuilder();
+                        response.add("state", "Ok");
+                        response.add("message", "Successfully Added.!");
+                        response.add("data", "");
+                        resp.getWriter().print(response.build());
+                    }
+
+                }
+
+//                JsonObjectBuilder response = Json.createObjectBuilder();
+//                response.add("state", "Ok");
+//                response.add("message", "Successfully Added.!");
+//                response.add("data", "");
+//                resp.getWriter().print(response.build());
+            }
+
+        } catch (ClassNotFoundException e) {
+            resp.addHeader("Content-Type", "application/json");
+            JsonObjectBuilder response = Json.createObjectBuilder();
+            response.add("state", "Error");
+            response.add("message", e.getMessage());
+            response.add("data", "");
+            resp.setStatus(400);
+            resp.getWriter().print(response.build());
+
+        } catch (SQLException e) {
+            resp.addHeader("Content-Type", "application/json");
+            JsonObjectBuilder response = Json.createObjectBuilder();
+            response.add("state", "Error");
+            response.add("message", e.getMessage());
+            response.add("data", "");
+            resp.setStatus(400);
+            resp.getWriter().print(response.build());
+
+        }
+
     }
 
     @Override

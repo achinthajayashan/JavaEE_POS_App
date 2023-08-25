@@ -981,12 +981,12 @@
             contentType: "application/json",
             data: JSON.stringify(a),
             success: function (resp) {
-                // alert(resp.message);
-                // console.log(resp.message)
+                alert(resp.message);
+                console.log(resp.message)
             },
             error: function (error) {
-                // alert(error.responseJSON.message);
-                // console.log(error.message)
+                alert(error.responseJSON.message);
+                console.log(error.message)
             }
         });
 
