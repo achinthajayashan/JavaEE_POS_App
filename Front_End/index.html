@@ -453,7 +453,7 @@
 
                 </div>
                 <div class="row ms-1">
-                    <button class="btn btn-outline-warning mt-5 mb-5" type="submit">Purchace</button>
+                    <button class="btn btn-outline-warning mt-5 mb-5" type="button" id="btnPurchaseOrder">Purchace</button>
                 </div>
 
             </div>
@@ -922,6 +922,7 @@
         }
     }
 
+    //add discount
     $('#inputDiscount').keydown(function (event){
 
         if (event.key==='Enter'){
@@ -934,6 +935,7 @@
 
     });
 
+    //balance set
     $('#inputCash').keydown(function (event){
 
         if (event.key==='Enter'){
@@ -944,6 +946,53 @@
         }
 
     });
+
+    //purchase order
+
+    $('#btnPurchaseOrder').click(function () {
+        let oID = $('#InputOID').val();
+        let oDate= $('#InputDate').val();
+        let oCusID= $('#selectCusId').val();
+        let oItemID= $('#selectItemId').val();
+        let oItemName= $('#ItemName').val();
+        let oUnitPrice= $('#UnitPrice').val();
+        let oQty= $('#Qty').val();
+        let oCartItems=cartItems;
+
+        console.log(oID,oDate,oCusID,oItemID,oItemName,oUnitPrice,oQty);
+        console.log(oCartItems);
+
+        let a = {
+            "oID": oID,
+            "oDate": oDate,
+            "oCusID": oCusID,
+            "oItemID": oItemID,
+            "oItemName": oItemName,
+            "oUnitPrice": oUnitPrice,
+            "oQty": oQty,
+            "oCartItems": oCartItems
+        }
+
+        $.ajax({
+            url: 'http://localhost:8080/JavaEE_Pos/placeOrder',
+            method: "post",
+            setRequestHeader:"Access-Control-Allow-Origin",
+            origin:"*",
+            contentType: "application/json",
+            data: JSON.stringify(a),
+            success: function (resp) {
+                // alert(resp.message);
+                // console.log(resp.message)
+            },
+            error: function (error) {
+                // alert(error.responseJSON.message);
+                // console.log(error.message)
+            }
+        });
+
+    })
+
+
 
 
 
