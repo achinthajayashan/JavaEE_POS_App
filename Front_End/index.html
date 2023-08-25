@@ -318,7 +318,7 @@
                             <label for="InputOID" class="form-label text-white">Order ID</label>
                             <input type="text"
                                    class="form-control bg-black border-white text-warning focus-ring-warning"
-                                   id="InputOID" readonly>
+                                   id="InputOID">
                         </div>
                         <div class="mb-1 col mb-4">
                             <label for="InputDate" class="form-label text-white">Date</label>
@@ -390,7 +390,7 @@
                 </form>
             </div>
 
-            <button class="btn btn-outline-light container-fluid mt-5 mb-5" type="submit">Add To Cart</button>
+            <button class="btn btn-outline-light container-fluid mt-5 mb-5" type="button" id="btnAddToCart">Add To Cart</button>
         </div>
 
         <div class="col m-3 ">
@@ -407,31 +407,7 @@
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">I-001</th>
-                        <td>Dell Monitor i12</td>
-                        <td>15000</td>
-                        <td>1</td>
-                        <td>15000</td>
-                        <td>
-                            <button type="button" class="btn btn-outline-light">Edit</button>
-                            <button type="button" class="btn btn-outline-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">I-002</th>
-                        <td>Lenovo Monitor l24</td>
-                        <td>18000</td>
-                        <td>02</td>
-                        <td>36000</td>
-                        <td>
-                            <button type="button" class="btn btn-outline-light">Edit</button>
-                            <button type="button" class="btn btn-outline-danger">Delete</button>
-                        </td>
-                    </tr>
-
-
+                    <tbody id="tblCart">
                     </tbody>
                 </table>
             </div>
@@ -496,6 +472,8 @@
     $('#orders').hide();
     $('#placeOrder').hide();
 
+    let cartItems;
+
     $('#btnCustomer').click(function () {
         $('#home').hide();
         $('#customer').show();
@@ -533,6 +511,7 @@
 
         loadCusIds();
         loadItemIds();
+         cartItems=[];
     });
 
 
@@ -902,6 +881,37 @@
         });
 
     });
+
+    // Add to Cart function
+
+    $('#btnAddToCart').click(function () {
+        addToCart();
+    });
+
+    function addToCart() {
+        let itemCode = $('#selectItemId').val();
+        let itemName = $('#ItemName').val();
+        let itemUnitPrice = $('#UnitPrice').val();
+        let qty = $('#Qty').val();
+        let totalofRow = itemUnitPrice*qty;
+
+        let cartItemsRow=[];
+
+        cartItemsRow.push(itemCode,itemName,itemUnitPrice,qty);
+
+        let row = `<tr><td>${itemCode}</td><td>${itemName}</td><td>${itemUnitPrice}</td><td>${qty}</td><td>${totalofRow}</td></tr>`;
+        $("#tblCart").append(row);
+
+
+        cartItems.push(cartItemsRow);
+
+        console.log(cartItemsRow);
+        console.log(cartItems);
+
+
+    }
+
+
 
 
 
