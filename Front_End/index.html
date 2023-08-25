@@ -415,10 +415,10 @@
                 <h5 class="text-warning  mt-3 mb-2">Purcahse Order</h5>
                 <div class="row">
                     <div class="mb-1 col">
-                        <label for="Total" class="form-label text-white">Total</label>
+                        <label for="inputTotal" class="form-label text-white">Total</label>
                         <input type="number"
                                class="form-control bg-black border-white text-warning focus-ring-warning focus-ring "
-                               id="Total" readonly>
+                               id="inputTotal" readonly>
                     </div>
 
                     <div class="mb-5 col text-warning">
@@ -473,6 +473,7 @@
     $('#placeOrder').hide();
 
     let cartItems;
+    let subTotal=0;
 
     $('#btnCustomer').click(function () {
         $('#home').hide();
@@ -889,6 +890,7 @@
     });
 
     function addToCart() {
+        subTotal=0;
         let itemCode = $('#selectItemId').val();
         let itemName = $('#ItemName').val();
         let itemUnitPrice = $('#UnitPrice').val();
@@ -897,7 +899,7 @@
 
         let cartItemsRow=[];
 
-        cartItemsRow.push(itemCode,itemName,itemUnitPrice,qty);
+        cartItemsRow.push(itemCode,itemName,itemUnitPrice,qty,totalofRow);
 
         let row = `<tr><td>${itemCode}</td><td>${itemName}</td><td>${itemUnitPrice}</td><td>${qty}</td><td>${totalofRow}</td></tr>`;
         $("#tblCart").append(row);
@@ -909,9 +911,12 @@
         console.log(cartItems);
 
 
+        for (let i = 0; i <= cartItems.length; i++) {
+            subTotal+=cartItems[i][4];
+            $('#inputTotal').val(parseInt(subTotal));
+            console.log(parseInt(subTotal));
+        }
     }
-
-
 
 
 
