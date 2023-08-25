@@ -996,22 +996,14 @@
 
     //search order
 
-    $('#searchButton').click(function () {
-        let searchCode="<td>"+$('#searchbar').val()+"<td>";
-        console.log(searchCode);
-
-        for (let i = 0; i < $('#tblOrders').children().length; i++) {
-            let rowNum = $('#tblOrders').children().get(i);
-            console.log(rowNum);
-            let colVal = rowNum.getElementsByTagName("td")[0];
-            console.log(colVal);
-            if (!(searchCode==colVal)){
-                rowNum.remove();
-            }
-        }
-    })
-
-
+    $(document).ready(function(){
+        $("#searchbar").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#tblOrders tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
 
 
 
