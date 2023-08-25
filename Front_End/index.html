@@ -134,7 +134,6 @@
     </section>
 </main>
 
-
 <main id="item" class="container">
     <section class="row p-4 m-0">
         <nav aria-label="breadcrumb" class="text-white">
@@ -337,16 +336,13 @@
                             <select class="form-select bg-black text-warning focus-ring-warning focus-ring"
                                     aria-label="Default select example" id="selectCusId">
                                 <option selected>Open this select menu</option>
-                                <option value="1">C-001</option>
-                                <option value="2">C-002</option>
-                                <option value="3">C-003</option>
                             </select>
                         </div>
                         <div class="mb-1 col mb-4">
-                            <label for="Name" class="form-label text-white">Customer Name</label>
+                            <label for="selectedCusName" class="form-label text-white">Customer Name</label>
                             <input type="text"
                                    class="form-control bg-black border-white text-warning focus-ring-warning focus-ring "
-                                   id="Name" readonly>
+                                   id="selectedCusName" readonly>
                         </div>
                     </div>
 
@@ -358,9 +354,6 @@
                             <select class="form-select bg-black text-warning focus-ring-warning focus-ring"
                                     aria-label="Default select example" id="selectItemId">
                                 <option selected>Open this select menu</option>
-                                <option value="1">I-001</option>
-                                <option value="2">I-002</option>
-                                <option value="3">I-003</option>
                             </select>
                         </div>
                         <div class="mb-1 col mb-4">
@@ -374,13 +367,9 @@
                     <div class="row">
                         <div class="mb-1 col">
                             <label for="UnitPrice" class="form-label text-white">Unit Price</label>
-                            <select class="form-select bg-black text-warning focus-ring-warning focus-ring"
-                                    aria-label="Default select example" id="UnitPrice">
-                                <option selected>Open this select menu</option>
-                                <option value="1">I-001</option>
-                                <option value="2">I-002</option>
-                                <option value="3">I-003</option>
-                            </select>
+                            <input type="number"
+                                   class="form-control bg-black border-white text-warning focus-ring-warning focus-ring "
+                                   id="UnitPrice" readonly>
                         </div>
                         <div class="mb-1 col">
                             <label for="QtyOnHnd" class="form-label text-white">Qty On Hnd</label>
@@ -541,6 +530,9 @@
         $('#item').hide();
         $('#orders').hide();
         $('#placeOrder').show();
+
+        loadCusIds();
+        loadItemIds();
     });
 
 
@@ -807,6 +799,111 @@
             }
         })
     });
+
+
+    //-----------------------------------------------------purchase order-----------------------------------------------
+
+    //load customer ids
+
+    function loadCusIds() {
+        var optionCus = '';
+
+        $.ajax({
+            url: 'http://localhost:8080/JavaEE_Pos/customer',
+            dataType: "json",
+            success: function (customers) {
+                for (let i in customers) {
+                    let cus = customers[i];
+                    let id = cus.id;
+                    optionCus += '<option value="' +id + '">' + id + '</option>';
+                }
+                $('#selectCusId').append(optionCus);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+
+    }
+
+    //set Customer name according to cus id
+
+    $('#selectCusId').change(function(){ //the event here is change
+            let thisVal=$(this).val();
+        $.ajax({
+            url: 'http://localhost:8080/JavaEE_Pos/customer',
+            dataType: "json",
+            success: function (customers) {
+                for (let i in customers) {
+                    let cus = customers[i];
+                    let id = cus.id;
+                    let name = cus.name;
+                    if (thisVal == id){
+                        $('#selectedCusName').val(name)
+                        break;
+                    }
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+
+    });
+
+    //load item ids
+    function loadItemIds() {
+        var optionItem = '';
+
+        $.ajax({
+            url: 'http://localhost:8080/JavaEE_Pos/item',
+            dataType: "json",
+            success: function (items) {
+                for (let i in items) {
+                    let item = items[i];
+                    let code = item.code;
+                    optionItem += '<option value="' +code + '">' + code + '</option>';
+                }
+                $('#selectItemId').append(optionItem);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+
+    }
+
+    //set Customer name according to cus id
+
+    $('#selectItemId').change(function(){ //the event here is change
+        let thisVal=$(this).val();
+        $.ajax({
+            url: 'http://localhost:8080/JavaEE_Pos/item',
+            dataType: "json",
+            success: function (items) {
+                for (let i in items) {
+                    let item = items[i];
+                    let code = item.code;
+                    let desc = item.desc;
+                    let unitPrice = item.unitPrice;
+                    let qtyOnHnd = item.qty;
+                    if (thisVal == code){
+                        $('#ItemName').val(desc);
+                        $('#UnitPrice').val(unitPrice);
+                        $('#QtyOnHnd').val(qtyOnHnd);
+
+                        break;
+                    }
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+
+    });
+
+
 
 
 </script>
