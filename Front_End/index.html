@@ -916,6 +916,7 @@
             data: JSON.stringify(a),
             success: function (resp) {
                 alert(resp.message);
+                updateItemQty();
                 console.log(resp.message)
             },
             error: function (error) {
@@ -948,6 +949,36 @@
                 console.log(error);
             }
         });
+    }
+
+    function updateItemQty() {
+        let itemID =$("#selectItemId").val()
+        let oldQty=$("#QtyOnHnd").val();
+        let buyingQty=$("#Qty").val();
+        let newQty=(oldQty-buyingQty).toString();
+
+        let b = {
+            "itemID": itemID,
+            "newQty": newQty,
+        }
+
+        $.ajax({
+            url: 'http://localhost:8080/JavaEE_Pos/placeOrder',
+            method: 'put',
+            origin: "*",
+            // header: "Access-Control-Allow-Origin",
+            setRequestHeader: "Access-Control-Allow-Origin",
+            contentType: "application/json",
+            data: JSON.stringify(b),
+            success: function (resp) {
+                alert(resp.message);
+            },
+            error: function (error) {
+                alert(error.responseJSON.message);
+            }
+        });
+
+
     }
 
 
