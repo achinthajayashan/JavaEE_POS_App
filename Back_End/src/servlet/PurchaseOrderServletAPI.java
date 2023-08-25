@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import java.sql.*;
 
 @WebServlet(urlPatterns = "/placeOrder")
-public class PurchaseOrderServlet extends HttpServlet {
+public class PurchaseOrderServletAPI extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,7 +31,7 @@ public class PurchaseOrderServlet extends HttpServlet {
                 String orderID = rst.getString(1);
                 String orderCusID = rst.getString(2);
                 String orderDate = rst.getString(3);
-//                String contact = String.valueOf(rst.getInt(4));
+//                String orderTotal = String.valueOf(rst.getInt(4));
 
                 JsonObjectBuilder customer = Json.createObjectBuilder();
 

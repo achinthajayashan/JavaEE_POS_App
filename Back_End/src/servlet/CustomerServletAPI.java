@@ -9,41 +9,40 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
-
-@WebServlet(urlPatterns = "/item")
-public class ItemServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/customer")
+public class CustomerServletAPI extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee_pos_app", "root", "12345678");
-            PreparedStatement pstm = connection.prepareStatement("select * from item");
+            PreparedStatement pstm = connection.prepareStatement("select * from customer");
             ResultSet rst = pstm.executeQuery();
             PrintWriter writer = resp.getWriter();
             resp.addHeader("Access-Control-Allow-Origin","*");
             resp.addHeader("Content-Type","application/json");
 
-            JsonArrayBuilder allItems = Json.createArrayBuilder();
+            JsonArrayBuilder allCustomers = Json.createArrayBuilder();
 
 
             while (rst.next()) {
-                String code = rst.getString(1);
-                String description = rst.getString(2);
-                double unitPrice = rst.getDouble(3);
-                double qty = rst.getDouble(4);
+                String id = rst.getString(1);
+                String name = rst.getString(2);
+                String address = rst.getString(3);
+                String contact = String.valueOf(rst.getInt(4));
 
-                JsonObjectBuilder item = Json.createObjectBuilder();
+                JsonObjectBuilder customer = Json.createObjectBuilder();
 
-                item.add("code",code);
-                item.add("desc",description);
-                item.add("unitPrice",unitPrice);
-                item.add("qty",qty);
+                customer.add("id",id);
+                customer.add("name",name);
+                customer.add("address",address);
+                customer.add("contact",contact);
 
-                allItems.add(item.build());
+                allCustomers.add(customer.build());
             }
 
-            writer.print(allItems.build());
+            writer.print(allCustomers.build());
 
 
         } catch (ClassNotFoundException e) {
@@ -55,20 +54,20 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String code = req.getParameter("txtItemID");
-        String description = req.getParameter("txtItemName");
-        double unitPrice = Double.parseDouble(req.getParameter("txtItemPrice"));
-        int qty = Integer.parseInt(req.getParameter("txtItemQty"));
+        String cusID = req.getParameter("cusID");
+        String cusName = req.getParameter("cusName");
+        String cusAddress = req.getParameter("cusAddress");
+        String cusContact = req.getParameter("cusContact");
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee_pos_app", "root", "12345678");
 
-            PreparedStatement pstm = connection.prepareStatement("insert into item values(?,?,?,?)");
-            pstm.setObject(1, code);
-            pstm.setObject(2, description);
-            pstm.setObject(3, unitPrice);
-            pstm.setObject(4, qty);
+            PreparedStatement pstm = connection.prepareStatement("insert into customer values(?,?,?,?)");
+            pstm.setObject(1, cusID);
+            pstm.setObject(2, cusName);
+            pstm.setObject(3, cusAddress);
+            pstm.setObject(4, cusContact);
             resp.addHeader("Access-Control-Allow-Origin","*");
             resp.addHeader("Content-Type", "application/json");
 
@@ -104,27 +103,21 @@ public class ItemServlet extends HttpServlet {
         resp.addHeader("Access-Control-Allow-Origin","*");
         JsonReader reader = Json.createReader(req.getReader());
         JsonObject jsonObject = reader.readObject();
-        String code = jsonObject.getString("code");
-        String desc = jsonObject.getString("desc");
-        double unitPrice = Double.parseDouble(jsonObject.getString("unitPrice"));
-        int qty = Integer.parseInt(jsonObject.getString("qty"));
-
-        System.out.println(code);
-        System.out.println(desc);
-        System.out.println(unitPrice);
-        System.out.println(qty);
-
+        String cusID = jsonObject.getString("cusID");
+        String cusName = jsonObject.getString("cusName");
+        String cusAddress = jsonObject.getString("cusAddress");
+        String cusContact = jsonObject.getString("cusContact");
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee_pos_app", "root", "12345678");
 
-            PreparedStatement pstm3 = connection.prepareStatement("update item set item_name=?,unit_price=? ,qty_on_hnd=? where item_ID=?");
-            pstm3.setObject(4, code);
-            pstm3.setObject(1, desc);
-            pstm3.setObject(2, unitPrice);
-            pstm3.setObject(3, qty);
+            PreparedStatement pstm3 = connection.prepareStatement("update customer set customer_name=?,address=? ,contact=? where customer_ID=?");
+            pstm3.setObject(4, cusID);
+            pstm3.setObject(1, cusName);
+            pstm3.setObject(2, cusAddress);
+            pstm3.setObject(3, cusContact);
             if (pstm3.executeUpdate() > 0) {
                 JsonObjectBuilder response = Json.createObjectBuilder();
                 response.add("state", "Ok");
@@ -152,15 +145,15 @@ public class ItemServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.addHeader("Access-Control-Allow-Origin","*");
-        String itemID = req.getParameter("code");
+        String cusID = req.getParameter("cusID");
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee_pos_app", "root", "12345678");
 
-            PreparedStatement pstm2 = connection.prepareStatement("delete from item where item_ID=?");
-            pstm2.setObject(1, itemID);
+            PreparedStatement pstm2 = connection.prepareStatement("delete from customer where customer_ID=?");
+            pstm2.setObject(1, cusID);
             if (pstm2.executeUpdate() > 0) {
                 JsonObjectBuilder response = Json.createObjectBuilder();
                 response.add("state", "Ok");
