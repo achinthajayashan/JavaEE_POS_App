@@ -16,7 +16,7 @@ public class PurchaseOrderServlet extends HttpServlet {
         System.out.println("dddddd");
         JsonReader reader = Json.createReader(req.getReader());
         JsonObject jsonObject = reader.readObject();
-        JsonArray jsonArray=reader.readArray();
+//        JsonArray jsonArray=reader.readArray();
         String oID = jsonObject.getString("oID");
         String oDate = jsonObject.getString("oDate");
         String oCusID = jsonObject.getString("oCusID");
@@ -26,10 +26,8 @@ public class PurchaseOrderServlet extends HttpServlet {
         String oQty = jsonObject.getString("oQty");
         JsonArray oCartItems = jsonObject.getJsonArray("oCartItems");
 
-        for (JsonValue jsonValues:oCartItems) {
-            JsonObject jsonObject1 =jsonValues.asJsonObject();
 
-        }
+
 
         System.out.println(oID);
         System.out.println(oDate);
