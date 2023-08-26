@@ -19,7 +19,9 @@ public class PurchaseOrderServletAPI extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee_pos_app", "root", "12345678");
             PreparedStatement pstm = connection.prepareStatement("select * from orders");
+//            PreparedStatement pstm2 = connection.prepareStatement("select * from order_detail");
             ResultSet rst = pstm.executeQuery();
+//            ResultSet rst2 = pstm2.executeQuery();
             PrintWriter writer = resp.getWriter();
             resp.addHeader("Access-Control-Allow-Origin","*");
             resp.addHeader("Content-Type","application/json");
@@ -43,6 +45,7 @@ public class PurchaseOrderServletAPI extends HttpServlet {
                 allCustomers.add(customer.build());
             }
 
+
             writer.print(allCustomers.build());
 
 
@@ -55,6 +58,7 @@ public class PurchaseOrderServletAPI extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         resp.addHeader("Access-Control-Allow-Origin","*");
         System.out.println("dddddd");
         JsonReader reader = Json.createReader(req.getReader());
@@ -87,7 +91,7 @@ public class PurchaseOrderServletAPI extends HttpServlet {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee_pos_app", "root", "12345678");
-
+            connection.setAutoCommit(false);
             PreparedStatement pstm = connection.prepareStatement("insert into orders values(?,?,?)");
             pstm.setObject(1, oID);
             pstm.setObject(2, oDate);
@@ -104,15 +108,21 @@ public class PurchaseOrderServletAPI extends HttpServlet {
                     pstm2.setObject(4, oCartItems.getJsonArray(i).getString(2));
 
                     if (pstm2.executeUpdate()>0){
+                        connection.commit();
                         resp.addHeader("Content-Type", "application/json");
                         JsonObjectBuilder response = Json.createObjectBuilder();
                         response.add("state", "Ok");
                         response.add("message", "Successfully Added.!");
                         response.add("data", "");
                         resp.getWriter().print(response.build());
+                    }else {
+                        connection.rollback();
                     }
 
                 }
+            }
+            else {
+                connection.rollback();
             }
 
         } catch (ClassNotFoundException e) {
