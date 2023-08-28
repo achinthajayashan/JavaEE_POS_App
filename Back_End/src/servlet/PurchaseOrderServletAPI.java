@@ -132,7 +132,7 @@ public class PurchaseOrderServletAPI extends HttpServlet {
 
                 }
             }
-            if (i== oCartItems.size()){
+            if (i== oCartItems.size()-1){
                 connection.commit();
             }
             else {
