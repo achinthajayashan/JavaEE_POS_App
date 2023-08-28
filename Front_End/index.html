@@ -844,11 +844,13 @@
         let itemName = $('#ItemName').val();
         let itemUnitPrice = $('#UnitPrice').val();
         let qty = $('#Qty').val();
+
         let totalofRow = itemUnitPrice*qty;
+        let qtyOnHnd = $('#QtyOnHnd').val();
 
         let cartItemsRow=[];
 
-        cartItemsRow.push(itemCode,itemName,itemUnitPrice,qty,totalofRow);
+        cartItemsRow.push(itemCode,itemName,itemUnitPrice,qty,totalofRow,qtyOnHnd);
 
         let row = `<tr><td>${itemCode}</td><td>${itemName}</td><td>${itemUnitPrice}</td><td>${qty}</td><td>${totalofRow}</td></tr>`;
         $("#tblCart").append(row);
@@ -903,6 +905,7 @@
         let oItemID= $('#selectItemId').val();
         let oItemName= $('#ItemName').val();
         let oUnitPrice= $('#UnitPrice').val();
+        let oQtyOnHnd = $('#QtyOnHnd').val();
         let oQty= $('#Qty').val();
         let oCartItems=cartItems;
 
@@ -917,6 +920,7 @@
             "oItemName": oItemName,
             "oUnitPrice": oUnitPrice,
             "oQty": oQty,
+            "oQtyOnHnd": oQtyOnHnd,
             "oCartItems": oCartItems
         }
 
@@ -929,7 +933,7 @@
             data: JSON.stringify(a),
             success: function (resp) {
                 alert(resp.message);
-                updateItemQty();
+                // updateItemQty();
                 console.log(resp.message)
             },
             error: function (error) {

@@ -71,6 +71,7 @@ public class PurchaseOrderServletAPI extends HttpServlet {
         String oItemName = jsonObject.getString("oItemName");
         String oUnitPrice = jsonObject.getString("oUnitPrice");
         String oQty = jsonObject.getString("oQty");
+        String oQtyOnHnd =jsonObject.getString("oQtyOnHnd");
         JsonArray oCartItems = jsonObject.getJsonArray("oCartItems");
 
 
@@ -98,9 +99,10 @@ public class PurchaseOrderServletAPI extends HttpServlet {
             pstm.setObject(3, oCusID);
             resp.addHeader("Content-Type", "application/json");
 
+            int i=0;
             if (pstm.executeUpdate() > 0) {
 
-                for (int i = 0; i < oCartItems.size(); i++) {
+                for ( i = 0; i < oCartItems.size(); i++) {
                     PreparedStatement pstm2 = connection.prepareStatement("insert into order_detail values(?,?,?,?)");
                     pstm2.setObject(1, oCartItems.getJsonArray(i).getString(0));
                     pstm2.setObject(2, oID);
@@ -108,18 +110,30 @@ public class PurchaseOrderServletAPI extends HttpServlet {
                     pstm2.setObject(4, oCartItems.getJsonArray(i).getString(2));
 
                     if (pstm2.executeUpdate()>0){
-                        connection.commit();
-                        resp.addHeader("Content-Type", "application/json");
-                        JsonObjectBuilder response = Json.createObjectBuilder();
-                        response.add("state", "Ok");
-                        response.add("message", "Successfully Added.!");
-                        response.add("data", "");
-                        resp.getWriter().print(response.build());
+                        PreparedStatement pstm3 = connection.prepareStatement("update item set qty_on_hnd=? where item_ID=?");
+                        int qty= Integer.parseInt(oCartItems.getJsonArray(i).getString(3));
+                        int qtyOnHnd= Integer.parseInt(oCartItems.getJsonArray(i).getString(5));
+                        int newQty = qtyOnHnd-qty;
+                        pstm3.setObject(2, oItemID);
+                        pstm3.setObject(1, newQty);
+                        if (pstm3.executeUpdate() > 0) {
+
+                            resp.addHeader("Content-Type", "application/json");
+                            JsonObjectBuilder response = Json.createObjectBuilder();
+                            response.add("state", "Ok");
+                            response.add("message", "Successfully Added.!");
+                            response.add("data", "");
+                            resp.getWriter().print(response.build());
+                        }
+
                     }else {
                         connection.rollback();
                     }
 
                 }
+            }
+            if (i== oCartItems.size()){
+                connection.commit();
             }
             else {
                 connection.rollback();
