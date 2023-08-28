@@ -9,16 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12c2b270-d4a2-46b9-ac74-0d74d257e5e0" name="Changes" comment="finished all">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/JavaEE_Pos.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/pos.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back_End/src/servlet/CustomerServletAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/src/servlet/CustomerServletAPI.java" afterDir="false" />
+    <list default="true" id="12c2b270-d4a2-46b9-ac74-0d74d257e5e0" name="Changes" comment="updet qty method changed">
       <change beforePath="$PROJECT_DIR$/Back_End/src/servlet/PurchaseOrderServletAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/src/servlet/PurchaseOrderServletAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Front_End/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Front_End/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Back_End/servlet/CustomerServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Back_End/servlet/ItemServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Back_End/servlet/PurchaseOrderServlet.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +177,7 @@
       <workItem from="1693032303915" duration="3476000" />
       <workItem from="1693120696863" duration="11000" />
       <workItem from="1693192361784" duration="3160000" />
-      <workItem from="1693198260246" duration="1923000" />
+      <workItem from="1693198260246" duration="2315000" />
     </task>
     <task id="LOCAL-00001" summary="fornt end">
       <created>1692796359252</created>
@@ -334,7 +326,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693070352936</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="updet qty method changed">
+      <created>1693200387260</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1693200387260</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -359,6 +358,7 @@
     <MESSAGE value="search" />
     <MESSAGE value="bugs fixed" />
     <MESSAGE value="finished all" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished all" />
+    <MESSAGE value="updet qty method changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="updet qty method changed" />
   </component>
 </project>
