@@ -1,6 +1,15 @@
 package servlet;
 
+import bo.BOFactory;
+import bo.custom.PurchaseOrderBO;
+import dto.CustomerDTO;
+import dto.OrderDTO;
+import dto.OrderDetailsDTO;
+import org.apache.commons.dbcp2.BasicDataSource;
+import util.ResponseUtil;
+
 import javax.json.*;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,58 +18,47 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Date;
 
 @WebServlet(urlPatterns = "/placeOrder")
 public class PurchaseOrderServletAPI extends HttpServlet {
 
+    PurchaseOrderBO purchaseOrderBO= (PurchaseOrderBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PO);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee_pos_app", "root", "12345678");
-            PreparedStatement pstm = connection.prepareStatement("select * from orders");
-//            PreparedStatement pstm2 = connection.prepareStatement("select * from order_detail");
-            ResultSet rst = pstm.executeQuery();
-//            ResultSet rst2 = pstm2.executeQuery();
-            PrintWriter writer = resp.getWriter();
-            resp.addHeader("Access-Control-Allow-Origin","*");
-            resp.addHeader("Content-Type","application/json");
+        ServletContext servletContext =getServletContext();
+        BasicDataSource pool = (BasicDataSource) servletContext.getAttribute("dbcp");
+        PrintWriter writer = resp.getWriter();
+        try (Connection connection=pool.getConnection()){
 
-            JsonArrayBuilder allCustomers = Json.createArrayBuilder();
+            JsonArrayBuilder allOrders = Json.createArrayBuilder();
+            ArrayList<OrderDTO> all = purchaseOrderBO.getAllOrders(connection);
+
+            for (OrderDTO orderDTO:all){
+                JsonObjectBuilder order = Json.createObjectBuilder();
+                order.add("oID",orderDTO.getOrderID());
+                order.add("oDate", String.valueOf(orderDTO.getDate()));
+                order.add("oCusID",orderDTO.getCustomerID());
+
+                allOrders.add(order).build();
 
 
-            while (rst.next()) {
-                String orderID = rst.getString(1);
-                String orderCusID = rst.getString(2);
-                String orderDate = rst.getString(3);
-//                String orderTotal = String.valueOf(rst.getInt(4));
-
-                JsonObjectBuilder customer = Json.createObjectBuilder();
-
-                customer.add("orderID",orderID);
-                customer.add("orderCusID",orderCusID);
-                customer.add("orderDate",orderDate);
-//                customer.add("contact",contact);
-
-                allCustomers.add(customer.build());
             }
-
-
-            writer.print(allCustomers.build());
-
+            writer.println(allOrders.build());
 
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            resp.getWriter().println(e.getMessage());
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            resp.getWriter().println(e.getMessage());
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        resp.addHeader("Access-Control-Allow-Origin","*");
-        System.out.println("dddddd");
+
         JsonReader reader = Json.createReader(req.getReader());
         JsonObject jsonObject = reader.readObject();
 //        JsonArray jsonArray=reader.readArray();
@@ -74,88 +72,37 @@ public class PurchaseOrderServletAPI extends HttpServlet {
         String oQtyOnHnd =jsonObject.getString("oQtyOnHnd");
         JsonArray oCartItems = jsonObject.getJsonArray("oCartItems");
 
+        ServletContext servletContext =getServletContext();
+        BasicDataSource pool = (BasicDataSource) servletContext.getAttribute("dbcp");
 
-        System.out.println(oID);
-        System.out.println(oDate);
-        System.out.println(oCusID);
-        System.out.println(oItemID);
-        System.out.println(oItemName);
-        System.out.println(oUnitPrice);
-        System.out.println(oQty);
-        System.out.println(oCartItems);
+        try (Connection connection= pool.getConnection()){
 
-        for (int i = 0; i < oCartItems.size(); i++) {
 
-            System.out.println(oCartItems.getJsonArray(i).getString(0));
-        }
 
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee_pos_app", "root", "12345678");
-            connection.setAutoCommit(false);
-            PreparedStatement pstm = connection.prepareStatement("insert into orders values(?,?,?)");
-            pstm.setObject(1, oID);
-            pstm.setObject(2, oDate);
-            pstm.setObject(3, oCusID);
-            resp.addHeader("Content-Type", "application/json");
+            ArrayList<OrderDetailsDTO> orderDetailsDTOS = new ArrayList<>();
 
-            int i=0;
-            if (pstm.executeUpdate() > 0) {
+            for (int i = 0; i < oCartItems.size(); i++) {
+                String iId= oCartItems.getJsonArray(i).getString(0);
+                int iQty= Integer.parseInt(oCartItems.getJsonArray(i).getString(3));
+                double iPrice= Double.parseDouble(oCartItems.getJsonArray(i).getString(2));
 
-                for ( i = 0; i < oCartItems.size(); i++) {
-                    PreparedStatement pstm2 = connection.prepareStatement("insert into order_detail values(?,?,?,?)");
-                    pstm2.setObject(1, oCartItems.getJsonArray(i).getString(0));
-                    pstm2.setObject(2, oID);
-                    pstm2.setObject(3, oCartItems.getJsonArray(i).getString(3));
-                    pstm2.setObject(4, oCartItems.getJsonArray(i).getString(2));
-
-                    if (pstm2.executeUpdate()>0){
-                        PreparedStatement pstm3 = connection.prepareStatement("update item set qty_on_hnd=? where item_ID=?");
-                        int qty= Integer.parseInt(oCartItems.getJsonArray(i).getString(3));
-                        int qtyOnHnd= Integer.parseInt(oCartItems.getJsonArray(i).getString(5));
-                        int newQty = qtyOnHnd-qty;
-                        pstm3.setObject(2, oItemID);
-                        pstm3.setObject(1, newQty);
-                        if (pstm3.executeUpdate() > 0) {
-
-                            resp.addHeader("Content-Type", "application/json");
-                            JsonObjectBuilder response = Json.createObjectBuilder();
-                            response.add("state", "Ok");
-                            response.add("message", "Successfully Added.!");
-                            response.add("data", "");
-                            resp.getWriter().print(response.build());
-                        }
-
-                    }else {
-                        connection.rollback();
-                    }
-
-                }
+                System.out.println(iId);
+                System.out.println(iQty);
+                System.out.println(iPrice);
+                orderDetailsDTOS.add(new OrderDetailsDTO(iId,oID,iQty,iPrice));
             }
-            if (i== oCartItems.size()-1){
-                connection.commit();
+
+            OrderDTO orderDTO = new OrderDTO(oID,oDate,oCusID,orderDetailsDTOS);
+            if (purchaseOrderBO.purchaseOrder(connection,orderDTO)){
+                resp.getWriter().print(ResponseUtil.getJson("OK","Successfully Added !"));
             }
-            else {
-                connection.rollback();
-            }
+
 
         } catch (ClassNotFoundException e) {
-            resp.addHeader("Content-Type", "application/json");
-            JsonObjectBuilder response = Json.createObjectBuilder();
-            response.add("state", "Error");
-            response.add("message", e.getMessage());
-            response.add("data", "");
-            resp.setStatus(400);
-            resp.getWriter().print(response.build());
+            resp.getWriter().print(ResponseUtil.getJson("Error",e.getMessage()));
 
         } catch (SQLException e) {
-            resp.addHeader("Content-Type", "application/json");
-            JsonObjectBuilder response = Json.createObjectBuilder();
-            response.add("state", "Error");
-            response.add("message", e.getMessage());
-            response.add("data", "");
-            resp.setStatus(400);
-            resp.getWriter().print(response.build());
+            resp.getWriter().print(ResponseUtil.getJson("Error",e.getMessage()));
 
         }
 
@@ -163,9 +110,6 @@ public class PurchaseOrderServletAPI extends HttpServlet {
 
     @Override
     protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.addHeader("Access-Control-Allow-Origin","*");
-        resp.addHeader("Access-Control-Allow-Headers","content-type");
-        resp.addHeader("Access-Control-Allow-Methods","PUT");
     }
 
 //    @Override

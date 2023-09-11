@@ -2,15 +2,56 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="pos" />
+      <artifact name="pos1" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12c2b270-d4a2-46b9-ac74-0d74d257e5e0" name="Changes" comment="updet qty method changed">
+    <list default="true" id="12c2b270-d4a2-46b9-ac74-0d74d257e5e0" name="Changes" comment="update qty method changed">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/commons_dbcp2_2_10_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/libr/commons-dbcp2-2.10.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/libr/commons-logging-1.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/libr/commons-pool2-2.11.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/bo/BOFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/bo/SuperBO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/bo/custom/CustomerBO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/bo/custom/ItemBO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/bo/custom/PurchaseOrderBO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/bo/custom/impl/CustomerBOImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/bo/custom/impl/ItemBOImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/bo/custom/impl/PurchaseOrderBOImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/dao/CrudDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/dao/DAOFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/dao/SQLUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/dao/SuperDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/dao/custom/CustomerDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/dao/custom/ItemDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/dao/custom/OrderDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/dao/custom/OrderDetailsDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/dao/custom/impl/CustomerDAOImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/dao/custom/impl/ItemDAOImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/dao/custom/impl/OrderDAOImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/dao/custom/impl/OrderDetailsDAOImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/dto/CustomerDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/dto/ItemDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/dto/OrderDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/dto/OrderDetailsDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/entity/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/entity/Item.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/entity/OrderDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/entity/Orders.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/filter/CrossFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/listener/Listener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back_End/src/util/ResponseUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/pos.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/pos1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back_End/Back_End.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/Back_End.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back_End/src/servlet/CustomerServletAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/src/servlet/CustomerServletAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back_End/src/servlet/ItemServletAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/src/servlet/ItemServletAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Back_End/src/servlet/PurchaseOrderServletAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/src/servlet/PurchaseOrderServletAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front_End/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Front_End/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +61,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -56,7 +98,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.web.browsers&quot;,
@@ -71,14 +113,18 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Back_End/src/lib" />
+      <recent name="$PROJECT_DIR$/Back_End/src/entity" />
       <recent name="$PROJECT_DIR$/Front_End" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Back_End/libr" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 8.5.9TEsting" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.90" ALTERNATIVE_JRE_ENABLED="false">
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="pos">
+        <artifact name="pos1">
           <settings>
             <option name="CONTEXT_PATH" value="/JavaEE_Pos" />
           </settings>
@@ -158,7 +204,7 @@
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="pos" />
+          <artifact name="pos1" />
         </option>
       </method>
     </configuration>
@@ -177,7 +223,15 @@
       <workItem from="1693032303915" duration="3476000" />
       <workItem from="1693120696863" duration="11000" />
       <workItem from="1693192361784" duration="3160000" />
-      <workItem from="1693198260246" duration="2315000" />
+      <workItem from="1693198260246" duration="7000000" />
+      <workItem from="1693302010017" duration="599000" />
+      <workItem from="1693371086033" duration="25000" />
+      <workItem from="1693983843470" duration="2448000" />
+      <workItem from="1694078466549" duration="1248000" />
+      <workItem from="1694169277809" duration="597000" />
+      <workItem from="1694233175834" duration="13047000" />
+      <workItem from="1694320869490" duration="19890000" />
+      <workItem from="1694400499664" duration="844000" />
     </task>
     <task id="LOCAL-00001" summary="fornt end">
       <created>1692796359252</created>
@@ -333,7 +387,21 @@
       <option name="project" value="LOCAL" />
       <updated>1693200387260</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="update qty method changed">
+      <created>1693200594073</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1693200594073</updated>
+    </task>
+    <task id="LOCAL-00024" summary="update qty method changed">
+      <created>1693200681237</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1693200681237</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -359,6 +427,7 @@
     <MESSAGE value="bugs fixed" />
     <MESSAGE value="finished all" />
     <MESSAGE value="updet qty method changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="updet qty method changed" />
+    <MESSAGE value="update qty method changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="update qty method changed" />
   </component>
 </project>

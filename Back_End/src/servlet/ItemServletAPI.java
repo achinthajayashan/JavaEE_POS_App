@@ -1,6 +1,14 @@
 package servlet;
 
+import bo.BOFactory;
+import bo.custom.ItemBO;
+import dto.CustomerDTO;
+import dto.ItemDTO;
+import org.apache.commons.dbcp2.BasicDataSource;
+import util.ResponseUtil;
+
 import javax.json.*;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,36 +17,33 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.ArrayList;
 
 @WebServlet(urlPatterns = "/item")
 public class ItemServletAPI extends HttpServlet {
 
+    ItemBO itemBO = (ItemBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ITEM);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee_pos_app", "root", "12345678");
-            PreparedStatement pstm = connection.prepareStatement("select * from item");
-            ResultSet rst = pstm.executeQuery();
+        ServletContext servletContext =getServletContext();
+        BasicDataSource pool = (BasicDataSource) servletContext.getAttribute("dbcp");
+        try(Connection connection = pool.getConnection()) {
+
             PrintWriter writer = resp.getWriter();
-            resp.addHeader("Access-Control-Allow-Origin","*");
-            resp.addHeader("Content-Type","application/json");
 
             JsonArrayBuilder allItems = Json.createArrayBuilder();
 
+            ArrayList<ItemDTO> all = itemBO.getAllItems(connection);
 
-            while (rst.next()) {
-                String code = rst.getString(1);
-                String description = rst.getString(2);
-                double unitPrice = rst.getDouble(3);
-                double qty = rst.getDouble(4);
+            for (ItemDTO itemDTO:all) {
 
                 JsonObjectBuilder item = Json.createObjectBuilder();
 
-                item.add("code",code);
-                item.add("desc",description);
-                item.add("unitPrice",unitPrice);
-                item.add("qty",qty);
+                item.add("code",itemDTO.getItemCode());
+                item.add("desc",itemDTO.getItemName());
+                item.add("unitPrice",itemDTO.getItemPrice());
+                item.add("qty",itemDTO.getItemQty());
 
                 allItems.add(item.build());
             }
@@ -47,9 +52,9 @@ public class ItemServletAPI extends HttpServlet {
 
 
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            resp.getWriter().println(e.getMessage());
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            resp.getWriter().println(e.getMessage());
         }
     }
 
@@ -60,48 +65,26 @@ public class ItemServletAPI extends HttpServlet {
         double unitPrice = Double.parseDouble(req.getParameter("txtItemPrice"));
         int qty = Integer.parseInt(req.getParameter("txtItemQty"));
 
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee_pos_app", "root", "12345678");
+        ServletContext servletContext =getServletContext();
+        BasicDataSource pool = (BasicDataSource) servletContext.getAttribute("dbcp");
 
-            PreparedStatement pstm = connection.prepareStatement("insert into item values(?,?,?,?)");
-            pstm.setObject(1, code);
-            pstm.setObject(2, description);
-            pstm.setObject(3, unitPrice);
-            pstm.setObject(4, qty);
-            resp.addHeader("Access-Control-Allow-Origin","*");
-            resp.addHeader("Content-Type", "application/json");
-
-            if (pstm.executeUpdate() > 0) {
-                JsonObjectBuilder response = Json.createObjectBuilder();
-                response.add("state", "Ok");
-                response.add("message", "Successfully Added.!");
-                response.add("data", "");
-                resp.getWriter().print(response.build());
+        try (Connection connection = pool.getConnection()){
+            ItemDTO itemDTO = new ItemDTO(code,description,unitPrice,qty);
+            if (itemBO.saveItem(connection,itemDTO)) {
+                resp.getWriter().print(ResponseUtil.getJson("OK","Successfully Updated !"));
             }
 
         } catch (ClassNotFoundException e) {
-            JsonObjectBuilder response = Json.createObjectBuilder();
-            response.add("state", "Error");
-            response.add("message", e.getMessage());
-            response.add("data", "");
-            resp.setStatus(400);
-            resp.getWriter().print(response.build());
+            resp.getWriter().print(ResponseUtil.getJson("Error",e.getMessage()));
 
         } catch (SQLException e) {
-            JsonObjectBuilder response = Json.createObjectBuilder();
-            response.add("state", "Error");
-            response.add("message", e.getMessage());
-            response.add("data", "");
-            resp.setStatus(400);
-            resp.getWriter().print(response.build());
+            resp.getWriter().print(ResponseUtil.getJson("Error",e.getMessage()));
 
         }
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.addHeader("Access-Control-Allow-Origin","*");
         JsonReader reader = Json.createReader(req.getReader());
         JsonObject jsonObject = reader.readObject();
         String code = jsonObject.getString("code");
@@ -109,89 +92,42 @@ public class ItemServletAPI extends HttpServlet {
         double unitPrice = Double.parseDouble(jsonObject.getString("unitPrice"));
         int qty = Integer.parseInt(jsonObject.getString("qty"));
 
-        System.out.println(code);
-        System.out.println(desc);
-        System.out.println(unitPrice);
-        System.out.println(qty);
+        ServletContext servletContext =getServletContext();
+        BasicDataSource pool = (BasicDataSource) servletContext.getAttribute("dbcp");
 
-
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee_pos_app", "root", "12345678");
-
-            PreparedStatement pstm3 = connection.prepareStatement("update item set item_name=?,unit_price=? ,qty_on_hnd=? where item_ID=?");
-            pstm3.setObject(4, code);
-            pstm3.setObject(1, desc);
-            pstm3.setObject(2, unitPrice);
-            pstm3.setObject(3, qty);
-            if (pstm3.executeUpdate() > 0) {
-                JsonObjectBuilder response = Json.createObjectBuilder();
-                response.add("state", "Ok");
-                response.add("message", "Successfully Updated.!");
-                response.add("data", "");
-                resp.getWriter().print(response.build());
+        try (Connection connection= pool.getConnection()){
+            ItemDTO itemDTO= new ItemDTO(code,desc,unitPrice,qty);
+           if (itemBO.updateItem(connection,itemDTO)) {
+               resp.getWriter().print(ResponseUtil.getJson("OK","Successfully Updated !"));
             }
         } catch (ClassNotFoundException e) {
-            JsonObjectBuilder response = Json.createObjectBuilder();
-            response.add("state", "Error");
-            response.add("message", e.getMessage());
-            response.add("data", "");
-            resp.setStatus(400);
-            resp.getWriter().print(response.build());
+            resp.getWriter().print(ResponseUtil.getJson("Error",e.getMessage()));
         } catch (SQLException e) {
-            JsonObjectBuilder response = Json.createObjectBuilder();
-            response.add("state", "Error");
-            response.add("message", e.getMessage());
-            response.add("data", "");
-            resp.setStatus(400);
-            resp.getWriter().print(response.build());
+            resp.getWriter().print(ResponseUtil.getJson("Error",e.getMessage()));
         }
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.addHeader("Access-Control-Allow-Origin","*");
         String itemID = req.getParameter("code");
 
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
+        ServletContext servletContext =getServletContext();
+        BasicDataSource pool = (BasicDataSource) servletContext.getAttribute("dbcp");
 
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee_pos_app", "root", "12345678");
-
-            PreparedStatement pstm2 = connection.prepareStatement("delete from item where item_ID=?");
-            pstm2.setObject(1, itemID);
-            if (pstm2.executeUpdate() > 0) {
-                JsonObjectBuilder response = Json.createObjectBuilder();
-                response.add("state", "Ok");
-                response.add("message", "Successfully Deleted.!");
-                response.add("data", "");
-                resp.getWriter().print(response.build());
+        try (Connection connection= pool.getConnection()){
+            if (itemBO.deleteItem(connection,itemID)) {
+                resp.getWriter().print(ResponseUtil.getJson("OK","Successfully Deleted !"));
             }
 
         } catch (ClassNotFoundException e) {
-            JsonObjectBuilder response = Json.createObjectBuilder();
-            response.add("state", "Error");
-            response.add("message", e.getMessage());
-            response.add("data", "");
-            resp.setStatus(400);
-            resp.getWriter().print(response.build());
+            resp.getWriter().print(ResponseUtil.getJson("Error",e.getMessage()));
         } catch (SQLException e) {
-            JsonObjectBuilder response = Json.createObjectBuilder();
-            response.add("state", "Error");
-            response.add("message", e.getMessage());
-            response.add("data", "");
-            resp.setStatus(400);
-            resp.getWriter().print(response.build());
+            resp.getWriter().print(ResponseUtil.getJson("Error",e.getMessage()));
         }
     }
 
     @Override
     protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.addHeader("Access-Control-Allow-Origin","*");
-        resp.addHeader("Access-Control-Allow-Methods","PUT");
-        resp.addHeader("Access-Control-Allow-Methods","DELETE");
-        resp.addHeader("Access-Control-Allow-Headers","content-type");
     }
 
 }
